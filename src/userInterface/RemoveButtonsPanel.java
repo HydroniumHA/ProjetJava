@@ -2,7 +2,6 @@ package userInterface;
 
 import controller.ApplicationController;
 import model.DeletePersonException;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -13,6 +12,7 @@ public class RemoveButtonsPanel extends JPanel {
     private ApplicationController controller;
 
     public RemoveButtonsPanel(RemoveForm removeForm) {
+        this.controller = new ApplicationController();
         this.removeForm = removeForm;
 
         this.setLayout(new FlowLayout());
@@ -47,7 +47,7 @@ public class RemoveButtonsPanel extends JPanel {
             try {
                 controller.deletePerson(removeForm.getRemovePanel().getNationalRegistrationNumber().getText());
             } catch (DeletePersonException exception) {
-
+                JOptionPane.showMessageDialog(null, exception,"Delete Person Exception", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

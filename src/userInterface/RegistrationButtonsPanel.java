@@ -1,11 +1,7 @@
 package userInterface;
 
 import controller.ApplicationController;
-import model.AddAddressException;
-import model.AddPersonException;
-import model.Address;
-import model.Person;
-
+import model.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -61,7 +57,7 @@ public class RegistrationButtonsPanel extends JPanel {
                 controller.addPerson(person);
                 controller.addAddress(address);
             } catch (AddPersonException | AddAddressException exception) {
-
+                JOptionPane.showMessageDialog(null, exception, "Add Person Exception", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
