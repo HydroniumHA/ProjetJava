@@ -1,5 +1,6 @@
 package dataAccess;
 
+import javax.swing.*;
 import java.sql.*;
 
 public class SingletonConnection {
@@ -7,7 +8,11 @@ public class SingletonConnection {
 
     public static Connection getInstance() {
         if (uniqueConnection == null) {
-            //DriverManager.getConnection("jdbc:mysql://localhost:3306/libiavelodb","root","mdpBD");
+            try {
+                uniqueConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/libiavelodb","root","mdpBD");
+            } catch (SQLException exception) {
+                JOptionPane.showMessageDialog(null, exception, "SQL Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
         return uniqueConnection;
     }
