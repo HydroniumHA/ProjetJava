@@ -15,8 +15,8 @@ public class PersonManager {
         dao.addPerson(person);
     }
 
-    public void deletePerson(String nationnalRegistrationNumber) throws DeletePersonException {
+    public void deletePerson(String nationalRegistrationNumber) throws DeletePersonException {
         //TESTS A FAIRE !!!
-        dao.deletePerson(nationnalRegistrationNumber);
+        dao.deletePerson(nationalRegistrationNumber);
     }
 }

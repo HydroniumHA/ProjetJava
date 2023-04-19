@@ -1,7 +1,6 @@
 package controller;
 
-import business.AddressManager;
-import business.PersonManager;
+import business.*;
 import model.*;
 
 public class ApplicationController {
@@ -21,7 +20,7 @@ public class ApplicationController {
         addressManager.addAddress(address);
     }
 
-    public void deletePerson(String nationnalRegistrationNumber) throws DeletePersonException {
-        personManager.deletePerson(nationnalRegistrationNumber);
+    public void deletePerson(String nationalRegistrationNumber) throws DeletePersonException {
+        personManager.deletePerson(nationalRegistrationNumber);
     }
 }

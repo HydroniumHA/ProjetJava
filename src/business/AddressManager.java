@@ -1,8 +1,7 @@
 package business;
 
 import dataAccess.AddressDBAccess;
-import model.AddAddressException;
-import model.Address;
+import model.*;
 
 public class AddressManager {
     private AddressDBAccess dao;
