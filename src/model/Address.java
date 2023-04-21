@@ -3,18 +3,22 @@ package model;
 import java.util.UUID;
 
 public class Address {
-    private UUID addressID;
+    private String addressID;
     private String street;
     private Integer number;
     private String cityName;
-    private Integer postalCode;
+    private Integer zip;
 
-    public Address(String street, Integer number, String cityName, Integer postalCode) {
-        this.addressID = UUID.randomUUID();
+    public Address(String addressID, String street, Integer number, String cityName, Integer zip) {
+        setAddressID(addressID);
         setStreet(street);
         setNumber(number);
         setCityName(cityName);
-        setPostalCode(postalCode);
+        setZip(zip);
+    }
+
+    public void setAddressID(String addressID) {
+        this.addressID = addressID;
     }
 
     public void setStreet(String street) {
@@ -29,11 +33,11 @@ public class Address {
         this.cityName = cityName;
     }
 
-    public void setPostalCode(Integer postalCode) {
-        this.postalCode = postalCode;
+    public void setZip(Integer zip) {
+        this.zip = zip;
     }
 
-    public UUID getAddressID() {
+    public String getAddressID() {
         return addressID;
     }
 
@@ -49,7 +53,7 @@ public class Address {
         return cityName;
     }
 
-    public Integer getPostalCode() {
-        return postalCode;
+    public Integer getZip() {
+        return zip;
     }
 }

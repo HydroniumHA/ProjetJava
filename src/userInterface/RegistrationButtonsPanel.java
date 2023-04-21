@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class RegistrationButtonsPanel extends JPanel {
     private JButton back, validation, reset;
@@ -49,7 +50,7 @@ public class RegistrationButtonsPanel extends JPanel {
             GenderPanel genderPanel = registrationForm.getFormPanel().getGenderPanel();
             NewsLetterPanel newsLetterPanel = registrationForm.getFormPanel().getNewsLetterPanel();
             //Valider les données ici !!!
-            Address address = new Address(formPanel.getStreet().getText(), Integer.parseInt(formPanel.getNumber().getText()), formPanel.getCityName().getText(), Integer.parseInt(formPanel.getPostalCode().getText()));
+            Address address = new Address(UUID.randomUUID().toString(), formPanel.getStreet().getText(), Integer.parseInt(formPanel.getNumber().getText()), formPanel.getCityName().getText(), Integer.parseInt(formPanel.getZip().getText()));
             //Mettre date correcte dans person !!!
             Person person = new Person(formPanel.getNationalRegistrationNumber().getText(), formPanel.getLastName().getText(), formPanel.getFirstName().getText(), genderPanel.getGender(), LocalDate.now(), formPanel.getEmail().getText(), formPanel.getPhoneNumber().getText(), newsLetterPanel.getSelected(), address.getAddressID());
 

@@ -6,8 +6,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class FormPanel extends JPanel {
-    private JLabel nationalRegistrationNumberLabel, nameLabel, firstNameLabel, genderLabel, birthdateLabel, emailLabel, phoneNumberLabel, streetLabel, numberLabel, cityNameLabel, postalCodeLabel, newsLetterLabel;
-    private JTextField nationalRegistrationNumber, name, firstName, email, phoneNumber, street, number, cityName, postalCode;
+    private JLabel nationalRegistrationNumberLabel, nameLabel, firstNameLabel, genderLabel, birthdateLabel, emailLabel, phoneNumberLabel, streetLabel, numberLabel, cityNameLabel, zipLabel, newsLetterLabel;
+    private JTextField nationalRegistrationNumber, name, firstName, email, phoneNumber, street, number, cityName, zip;
     private JFormattedTextField birthdate;
     private GenderPanel genderPanel;
     private NewsLetterPanel newsLetterPanel;
@@ -86,11 +86,11 @@ public class FormPanel extends JPanel {
         this.add(cityName);
         this.add(new Panel());
 
-        postalCodeLabel = new JLabel("Postal code :");
-        postalCodeLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        postalCode = new JTextField();
-        this.add(postalCodeLabel);
-        this.add(postalCode);
+        zipLabel = new JLabel("Postal code :");
+        zipLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+        zip = new JTextField();
+        this.add(zipLabel);
+        this.add(zip);
         this.add(new Panel());
 
         newsLetterLabel = new JLabel("Newsletter :");
@@ -137,8 +137,8 @@ public class FormPanel extends JPanel {
         return cityName;
     }
 
-    public JTextField getPostalCode() {
-        return postalCode;
+    public JTextField getZip() {
+        return zip;
     }
 
     public GenderPanel getGenderPanel() {
@@ -160,7 +160,7 @@ public class FormPanel extends JPanel {
         street.setText("");
         number.setText("");
         cityName.setText("");
-        postalCode.setText("");
+        zip.setText("");
         newsLetterPanel.setInitialAll();
     }
 }

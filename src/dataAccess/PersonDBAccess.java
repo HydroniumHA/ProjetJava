@@ -16,7 +16,7 @@ public class PersonDBAccess {
             java.sql.Date sqlDate = java.sql.Date.valueOf(person.getBirthdate());
             statement.setDate(5, sqlDate);
             statement.setBoolean(6, person.getWantsNewsLetter());
-            statement.setString(7, person.getAddressID().toString());
+            statement.setString(7, person.getAddressID());
             statement.executeUpdate();
             if (person.getEmail() != null) {
                 sql = "UPDATE person SET email = ? WHERE nationalRegistrationNumber = ?";

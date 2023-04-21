@@ -1,7 +1,6 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 public class Person {
     private String nationalRegistrationNumber;
@@ -12,9 +11,9 @@ public class Person {
     private String email;
     private String phoneNumber;
     private Boolean wantsNewsLetter;
-    private UUID addressID;
+    private String addressID;
 
-    public Person(String nationalRegistrationNumber, String name, String firstName, Character gender, LocalDate birthdate, String email, String phoneNumber, Boolean wantsNewsLetter, UUID addressID) {
+    public Person(String nationalRegistrationNumber, String name, String firstName, Character gender, LocalDate birthdate, String email, String phoneNumber, Boolean wantsNewsLetter, String addressID) {
         setNationalRegistrationNumber(nationalRegistrationNumber);
         setName(name);
         setFirstName(firstName);
@@ -58,7 +57,7 @@ public class Person {
         this.wantsNewsLetter = wantsNewsLetter;
     }
 
-    public void setAddress(UUID addressID) {
+    public void setAddress(String addressID) {
         this.addressID = addressID;
     }
 
@@ -94,7 +93,7 @@ public class Person {
         return wantsNewsLetter;
     }
 
-    public UUID getAddressID() {
+    public String getAddressID() {
         return addressID;
     }
 }

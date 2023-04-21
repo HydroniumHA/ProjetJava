@@ -6,8 +6,8 @@ import java.awt.event.*;
 
 public class MenuWindow extends JFrame {
     private JMenuBar menuBar;
-    private JMenu fileMenu, customerMenu, helpMenu;
-    private JMenuItem exit, signUp, remove, about;
+    private JMenu fileMenu, customerMenu, queriesMenu, helpMenu;
+    private JMenuItem exit, signUp, modifications, remove, invoices, about;
     private Container mainContainer;
 
     public MenuWindow() {
@@ -49,10 +49,26 @@ public class MenuWindow extends JFrame {
 
         customerMenu.addSeparator();
 
+        modifications = new JMenuItem("Modifications");
+        customerMenu.add(modifications);
+        ModificationsListener modificationsListener = new ModificationsListener();
+        modifications.addActionListener(modificationsListener);
+
+        customerMenu.addSeparator();
+
         remove = new JMenuItem("Remove");
         customerMenu.add(remove);
         RemoveListener removeListener = new RemoveListener();
         remove.addActionListener(removeListener);
+
+        queriesMenu = new JMenu("Queries");
+        queriesMenu.setMnemonic('Q');
+        menuBar.add(queriesMenu);
+
+        invoices = new JMenuItem("Invoices");
+        queriesMenu.add(invoices);
+        InvoicesListener invoicesListener = new InvoicesListener();
+        invoices.addActionListener(invoicesListener);
 
         helpMenu = new JMenu("Help");
         helpMenu.setMnemonic('H');
@@ -81,10 +97,28 @@ public class MenuWindow extends JFrame {
         }
     }
 
+    private class ModificationsListener implements ActionListener {
+        public void actionPerformed(ActionEvent event) {
+            mainContainer.removeAll();
+            mainContainer.add(new RemoveForm(), BorderLayout.CENTER);
+            revalidate();
+            repaint();
+        }
+    }
+
     private class RemoveListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             mainContainer.removeAll();
             mainContainer.add(new RemoveForm(), BorderLayout.CENTER);
+            revalidate();
+            repaint();
+        }
+    }
+
+    private class InvoicesListener implements ActionListener {
+        public void actionPerformed(ActionEvent event) {
+            mainContainer.removeAll();
+            mainContainer.add(new AllInvoicesForm(), BorderLayout.CENTER);
             revalidate();
             repaint();
         }
