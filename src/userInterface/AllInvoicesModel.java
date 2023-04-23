@@ -5,19 +5,20 @@ import javax.swing.table.AbstractTableModel;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 public class AllInvoicesModel extends AbstractTableModel {
     private ArrayList<String> columnNames;
-    private ArrayList<Invoice> contents;
+    private HashMap<Invoice, String> contents;
 
-    public AllInvoicesModel(ArrayList<Invoice> invoices) {
+    public AllInvoicesModel(HashMap<Invoice, String> invoices) {
+        contents = new HashMap<>(invoices);
         columnNames = new ArrayList<>();
+        columnNames.add("Name");
+        columnNames.add("TotalPriceIncludingVAT");
         columnNames.add("DocumentID");
         columnNames.add("Date");
-        columnNames.add("TotalPriceWithoutVAT");
-        columnNames.add("TotalPriceIncludingVAT");
         columnNames.add("isPaid");
-        //setContents(invoices);
     }
 
     public int getColumnCount() {
@@ -33,13 +34,13 @@ public class AllInvoicesModel extends AbstractTableModel {
     }
 
     public Object getValueAt(int row, int column) {
-        Invoice invoice = contents.get(row);
+        Invoice invoice = (Invoice)contents.keySet().toArray()[row];
 
         switch (column) {
-            case 0: return invoice.getDocumentID();
-            case 1: return java.util.Date.from(invoice.getDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
-            case 2: return invoice.getTotalPriceWithoutVAT();
-            case 3: return invoice.getTotalPriceIncludingVAT();
+            case 0: return contents.get(invoice);
+            case 1: return invoice.getTotalPriceIncludingVAT();
+            case 2: return invoice.getDocumentID();
+            case 3: return java.util.Date.from(invoice.getDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
             case 4: return invoice.getPaid();
             default: return null;
         }
@@ -49,9 +50,6 @@ public class AllInvoicesModel extends AbstractTableModel {
         Class c;
 
         switch (column) {
-            case 0:
-                c = String.class;
-                break;
             case 1:
                 c = Date.class;
                 break;
@@ -61,6 +59,7 @@ public class AllInvoicesModel extends AbstractTableModel {
             case 4:
                 c = Boolean.class;
                 break;
+            case 0, 5:
             default:
                 c = String.class;
         }

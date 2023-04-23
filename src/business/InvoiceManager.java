@@ -2,7 +2,7 @@ package business;
 
 import dataAccess.InvoiceDBAccess;
 import model.*;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class InvoiceManager {
     private InvoiceDBAccess dao;
@@ -11,7 +11,7 @@ public class InvoiceManager {
         this.dao = new InvoiceDBAccess();
     }
 
-    public ArrayList<Invoice> getAllInvoices(String cityName, double minAmount) throws AllInvoicesException {
+    public HashMap<Invoice, String> getAllInvoices(String cityName, double minAmount) throws AllInvoicesException {
         return dao.getAllInvoices(cityName, minAmount);
     }
 }

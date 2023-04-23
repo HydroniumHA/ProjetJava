@@ -8,13 +8,15 @@ public class Invoice {
     private Double totalPriceWithoutVAT;
     private Double totalPriceIncludingVAT;
     private Boolean isPaid;
+    private String subscriptionID;
 
-    public Invoice(String documentID, LocalDate date, Double totalPriceWithoutVAT, Double totalPriceIncludingVAT, Boolean isPaid) {
+    public Invoice(String documentID, LocalDate date, Double totalPriceWithoutVAT, Double totalPriceIncludingVAT, Boolean isPaid, String subscriptionID) {
         setDocumentID(documentID);
         setDate(date);
         setTotalPriceWithoutVAT(totalPriceWithoutVAT);
         setTotalPriceIncludingVAT(totalPriceIncludingVAT);
         setPaid(isPaid);
+        setSubscriptionID(subscriptionID);
     }
 
     public void setDocumentID(String documentID) {
@@ -34,7 +36,10 @@ public class Invoice {
     }
 
     public void setPaid(Boolean paid) {
-        isPaid = paid;
+        this.isPaid = paid;
+    }
+    private void setSubscriptionID(String subscriptionID) {
+        this.subscriptionID = subscriptionID;
     }
 
     public String getDocumentID() {
@@ -45,15 +50,15 @@ public class Invoice {
         return date;
     }
 
-    public Double getTotalPriceWithoutVAT() {
-        return totalPriceWithoutVAT;
-    }
-
     public Double getTotalPriceIncludingVAT() {
         return totalPriceIncludingVAT;
     }
 
     public Boolean getPaid() {
         return isPaid;
+    }
+
+    public String getSubscriptionID() {
+        return subscriptionID;
     }
 }

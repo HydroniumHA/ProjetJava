@@ -2,8 +2,7 @@ package controller;
 
 import business.*;
 import model.*;
-
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ApplicationController {
     private PersonManager personManager;
@@ -28,7 +27,7 @@ public class ApplicationController {
         personManager.deletePerson(nationalRegistrationNumber);
     }
 
-    public ArrayList<Invoice> getAllInvoices(String cityName, double minAmount) throws AllInvoicesException {
+    public HashMap<Invoice, String> getAllInvoices(String cityName, double minAmount) throws AllInvoicesException {
         return invoiceManager.getAllInvoices(cityName, minAmount);
     }
 }
