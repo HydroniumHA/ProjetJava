@@ -1,7 +1,7 @@
 package userInterface;
 
 import controller.ApplicationController;
-import model.DeletePersonException;
+import model.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
