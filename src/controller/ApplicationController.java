@@ -8,11 +8,13 @@ public class ApplicationController {
     private PersonManager personManager;
     private AddressManager addressManager;
     private InvoiceManager invoiceManager;
+    private RepairOrderManager repairOrderManager;
 
     public ApplicationController() {
         this.personManager = new PersonManager();
         this.addressManager = new AddressManager();
         this.invoiceManager = new InvoiceManager();
+        this.repairOrderManager = new RepairOrderManager();
     }
 
     public void addPerson(Person person) throws AddPersonException {
@@ -29,5 +31,9 @@ public class ApplicationController {
 
     public HashMap<Invoice, String> getAllInvoices(String cityName, double minAmount) throws AllInvoicesException {
         return invoiceManager.getAllInvoices(cityName, minAmount);
+    }
+
+    public HashMap<Bike, String> getAllRepairOrders(String buildingID) throws AllRepairOrdersException {
+        return repairOrderManager.getAllRepairOrders(buildingID);
     }
 }
