@@ -1,9 +1,7 @@
 package business;
 
 import dataAccess.InvoiceDBAccess;
-import model.AllInvoicesException;
-import model.Invoice;
-
+import model.*;
 import java.util.ArrayList;
 
 public class InvoiceManager {
