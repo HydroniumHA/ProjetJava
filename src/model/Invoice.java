@@ -38,6 +38,7 @@ public class Invoice {
     public void setPaid(Boolean paid) {
         this.isPaid = paid;
     }
+
     private void setSubscriptionID(String subscriptionID) {
         this.subscriptionID = subscriptionID;
     }
@@ -56,9 +57,5 @@ public class Invoice {
 
     public Boolean getPaid() {
         return isPaid;
-    }
-
-    public String getSubscriptionID() {
-        return subscriptionID;
     }
 }

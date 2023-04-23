@@ -51,15 +51,15 @@ public class AllInvoicesModel extends AbstractTableModel {
 
         switch (column) {
             case 1:
-                c = Date.class;
-                break;
-            case 2, 3:
                 c = Double.class;
+                break;
+            case 3:
+                c = Date.class;
                 break;
             case 4:
                 c = Boolean.class;
                 break;
-            case 0, 5:
+            case 0, 2:
             default:
                 c = String.class;
         }
