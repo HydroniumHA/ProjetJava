@@ -23,9 +23,9 @@ public class AboutInformation extends JPanel {
     private class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             AboutInformation.this.removeAll();
-            JLabel texte = new JLabel("Welcome to the Libiavelo management software.");
-            texte.setHorizontalAlignment(SwingConstants.CENTER);
-            AboutInformation.this.add(texte);
+            JLabel text = new JLabel("Welcome to the Libiavelo management software.");
+            text.setHorizontalAlignment(SwingConstants.CENTER);
+            AboutInformation.this.add(text);
             AboutInformation.this.revalidate();
             AboutInformation.this.repaint();
         }

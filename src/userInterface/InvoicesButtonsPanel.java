@@ -34,9 +34,9 @@ public class InvoicesButtonsPanel extends JPanel {
     private class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             allInvoicesForm.removeAll();
-            JLabel texte = new JLabel("Welcome to the Libiavelo management software.");
-            texte.setHorizontalAlignment(SwingConstants.CENTER);
-            allInvoicesForm.add(texte);
+            JLabel text = new JLabel("Welcome to the Libiavelo management software.");
+            text.setHorizontalAlignment(SwingConstants.CENTER);
+            allInvoicesForm.add(text);
             allInvoicesForm.revalidate();
             allInvoicesForm.repaint();
         }

@@ -34,9 +34,9 @@ public class RepairOrdersButtonsPanel extends JPanel {
     private class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             allRepairOrdersForm.removeAll();
-            JLabel texte = new JLabel("Welcome to the Libiavelo management software.");
-            texte.setHorizontalAlignment(SwingConstants.CENTER);
-            allRepairOrdersForm.add(texte);
+            JLabel text = new JLabel("Welcome to the Libiavelo management software.");
+            text.setHorizontalAlignment(SwingConstants.CENTER);
+            allRepairOrdersForm.add(text);
             allRepairOrdersForm.revalidate();
             allRepairOrdersForm.repaint();
         }
