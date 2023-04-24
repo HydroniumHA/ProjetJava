@@ -7,7 +7,7 @@ import java.awt.event.*;
 public class MenuWindow extends JFrame {
     private JMenuBar menuBar;
     private JMenu fileMenu, customerMenu, queriesMenu, helpMenu;
-    private JMenuItem exit, signUp, modifications, remove, invoices, repairOrders, about;
+    private JMenuItem exit, signUp, modifications, remove, invoices, repairOrders, persons, about;
     private Container mainContainer;
 
     public MenuWindow() {
@@ -77,6 +77,13 @@ public class MenuWindow extends JFrame {
         RepairOrdersListener repairOrdersListener = new RepairOrdersListener();
         repairOrders.addActionListener(repairOrdersListener);
 
+        queriesMenu.addSeparator();
+
+        persons = new JMenuItem("Persons");
+        queriesMenu.add(persons);
+        PersonsListener personsListener = new PersonsListener();
+        persons.addActionListener(personsListener);
+
         helpMenu = new JMenu("Help");
         helpMenu.setMnemonic('H');
         menuBar.add(helpMenu);
@@ -135,6 +142,15 @@ public class MenuWindow extends JFrame {
         public void actionPerformed(ActionEvent event) {
             mainContainer.removeAll();
             mainContainer.add(new AllRepairOrdersForm(), BorderLayout.CENTER);
+            revalidate();
+            repaint();
+        }
+    }
+
+    private class PersonsListener implements ActionListener {
+        public void actionPerformed(ActionEvent event) {
+            mainContainer.removeAll();
+            mainContainer.add(new AllPersonsForm(), BorderLayout.CENTER);
             revalidate();
             repaint();
         }

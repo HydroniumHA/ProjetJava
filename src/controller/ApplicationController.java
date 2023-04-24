@@ -36,4 +36,8 @@ public class ApplicationController {
     public HashMap<Bike, String> getAllRepairOrders(String buildingID) throws AllRepairOrdersException {
         return repairOrderManager.getAllRepairOrders(buildingID);
     }
+
+    public HashMap<Person, String> getAllPersons(String bikeID) throws AllPersonsException {
+        return personManager.getAllPersons(bikeID);
+    }
 }
