@@ -4,15 +4,15 @@ import java.time.LocalDate;
 
 public class Invoice {
     private String documentID;
-    private LocalDate date;
+    private LocalDate invoiceDate;
     private Double totalPriceWithoutVAT;
     private Double totalPriceIncludingVAT;
     private Boolean isPaid;
     private String subscriptionID;
 
-    public Invoice(String documentID, LocalDate date, Double totalPriceWithoutVAT, Double totalPriceIncludingVAT, Boolean isPaid, String subscriptionID) {
+    public Invoice(String documentID, LocalDate invoiceDate, Double totalPriceWithoutVAT, Double totalPriceIncludingVAT, Boolean isPaid, String subscriptionID) {
         setDocumentID(documentID);
-        setDate(date);
+        setDate(invoiceDate);
         setTotalPriceWithoutVAT(totalPriceWithoutVAT);
         setTotalPriceIncludingVAT(totalPriceIncludingVAT);
         setPaid(isPaid);
@@ -23,8 +23,8 @@ public class Invoice {
         this.documentID = documentID;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setDate(LocalDate invoiceDate) {
+        this.invoiceDate = invoiceDate;
     }
 
     public void setTotalPriceWithoutVAT(Double totalPriceWithoutVAT) {
@@ -48,7 +48,7 @@ public class Invoice {
     }
 
     public LocalDate getDate() {
-        return date;
+        return invoiceDate;
     }
 
     public Double getTotalPriceIncludingVAT() {

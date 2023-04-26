@@ -14,7 +14,7 @@ public class InvoiceDBAccess {
             HashMap<Invoice, String> allInvoices = new HashMap<>();
             Invoice invoice;
             while (data.next()) {
-                invoice = new Invoice(data.getString("documentID"), data.getDate("date").toLocalDate(), data.getDouble("totalPriceWithoutVAT"), data.getDouble("totalPriceIncludingVAT"), data.getBoolean("isPaid"), data.getString("subscriptionID"));
+                invoice = new Invoice(data.getString("documentID"), data.getDate("invoiceDate").toLocalDate(), data.getDouble("totalPriceWithoutVAT"), data.getDouble("totalPriceIncludingVAT"), data.getBoolean("isPaid"), data.getString("subscriptionID"));
                 allInvoices.put(invoice, data.getString("name"));
             }
             connection.close();

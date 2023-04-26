@@ -17,8 +17,8 @@ public class AllInvoicesModel extends AbstractTableModel {
         columnNames.add("Name");
         columnNames.add("TotalPriceIncludingVAT");
         columnNames.add("DocumentID");
-        columnNames.add("Date");
-        columnNames.add("isPaid");
+        columnNames.add("InvoiceDate");
+        columnNames.add("IsPaid");
     }
 
     public int getColumnCount() {
