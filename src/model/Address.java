@@ -5,14 +5,14 @@ import java.util.UUID;
 public class Address {
     private String addressID;
     private String street;
-    private Integer number;
+    private Integer streetNumber;
     private String cityName;
     private Integer zip;
 
-    public Address(String addressID, String street, Integer number, String cityName, Integer zip) {
+    public Address(String addressID, String street, Integer streetNumber, String cityName, Integer zip) {
         setAddressID(addressID);
         setStreet(street);
-        setNumber(number);
+        setNumber(streetNumber);
         setCityName(cityName);
         setZip(zip);
     }
@@ -25,8 +25,8 @@ public class Address {
         this.street = street;
     }
 
-    public void setNumber(Integer number) {
-        this.number = number;
+    public void setNumber(Integer streetNumber) {
+        this.streetNumber = streetNumber;
     }
 
     public void setCityName(String cityName) {
@@ -46,7 +46,7 @@ public class Address {
     }
 
     public Integer getNumber() {
-        return number;
+        return streetNumber;
     }
 
     public String getCityName() {

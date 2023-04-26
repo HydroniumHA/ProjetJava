@@ -6,8 +6,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class FormPanel extends JPanel {
-    private JLabel nationalRegistrationNumberLabel, nameLabel, firstNameLabel, genderLabel, birthdateLabel, emailLabel, phoneNumberLabel, streetLabel, numberLabel, cityNameLabel, zipLabel, newsLetterLabel;
-    private JTextField nationalRegistrationNumber, name, firstName, email, phoneNumber, street, number, cityName, zip;
+    private JLabel nationalRegistrationNumberLabel, nameLabel, firstNameLabel, genderLabel, birthdateLabel, emailLabel, phoneNumberLabel, streetLabel, streetNumberLabel, cityNameLabel, zipLabel, newsLetterLabel;
+    private JTextField nationalRegistrationNumber, name, firstName, email, phoneNumber, street, streetNumber, cityName, zip;
     private JFormattedTextField birthdate;
     private GenderPanel genderPanel;
     private NewsLetterPanel newsLetterPanel;
@@ -72,11 +72,11 @@ public class FormPanel extends JPanel {
         this.add(street);
         this.add(new Panel());
 
-        numberLabel = new JLabel("Number :");
-        numberLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        number = new JTextField();
-        this.add(numberLabel);
-        this.add(number);
+        streetNumberLabel = new JLabel("Street number :");
+        streetNumberLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+        streetNumber = new JTextField();
+        this.add(streetNumberLabel);
+        this.add(streetNumber);
         this.add(new Panel());
 
         cityNameLabel = new JLabel("City name :");
@@ -130,7 +130,7 @@ public class FormPanel extends JPanel {
     }
 
     public JTextField getNumber() {
-        return number;
+        return streetNumber;
     }
 
     public JTextField getCityName() {
@@ -158,7 +158,7 @@ public class FormPanel extends JPanel {
         email.setText("");
         phoneNumber.setText("");
         street.setText("");
-        number.setText("");
+        streetNumber.setText("");
         cityName.setText("");
         zip.setText("");
         newsLetterPanel.setInitialAll();
