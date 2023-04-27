@@ -22,7 +22,6 @@ public class PersonManager {
     }
 
     public ArrayList<Person> getAllPersons() throws AllPersonsException {
-        //TESTS A FAIRE !!!
         return dao.getAllPersons();
     }
 }
