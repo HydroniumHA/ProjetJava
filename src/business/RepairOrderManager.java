@@ -12,6 +12,7 @@ public class RepairOrderManager {
     }
 
     public HashMap<Bike, String> getAllRepairOrders(String buildingID) throws AllRepairOrdersException {
+        // TESTS A FAIRE !!!
         return dao.getAllRepairOrders(buildingID);
     }
 }
