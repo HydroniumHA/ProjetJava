@@ -5,20 +5,22 @@ import javax.swing.table.AbstractTableModel;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 public class AllPersonsModel extends AbstractTableModel {
     private ArrayList<String> columnNames;
-    private HashMap<Person, String> contents;
+    private ArrayList<Person> contents;
 
-    public AllPersonsModel(HashMap<Person, String> persons) {
-        contents = new HashMap<>(persons);
+    public AllPersonsModel(ArrayList<Person> persons) {
+        contents = new ArrayList<>(persons);
         columnNames = new ArrayList<>();
+        columnNames.add("NationalRegistrationNumber");
         columnNames.add("Name");
         columnNames.add("Firstname");
         columnNames.add("Birthdate");
         columnNames.add("Gender");
-        columnNames.add("CardID");
+        columnNames.add("Email");
+        columnNames.add("WantsNewsLetter");
+        columnNames.add("PhoneNumber");
     }
 
     public int getColumnCount() {
@@ -34,19 +36,25 @@ public class AllPersonsModel extends AbstractTableModel {
     }
 
     public Object getValueAt(int row, int column) {
-        Person person = (Person) contents.keySet().toArray()[row];
+        Person person = contents.get(row);
 
         switch (column) {
             case 0:
-                return person.getName();
+                return person.getNationalRegistrationNumber();
             case 1:
-                return person.getFirstName();
+                return person.getName();
             case 2:
-                return java.util.Date.from(person.getBirthdate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+                return person.getFirstName();
             case 3:
-                return person.getGender();
+                return java.util.Date.from(person.getBirthdate().atStartOfDay(ZoneId.systemDefault()).toInstant());
             case 4:
-                return contents.get(person);
+                return person.getGender();
+            case 5:
+                return person.getEmail();
+            case 6:
+                return person.getWantsNewsLetter();
+            case 7:
+                return person.getPhoneNumber();
             default:
                 return null;
         }
@@ -56,13 +64,16 @@ public class AllPersonsModel extends AbstractTableModel {
         Class c;
 
         switch (column) {
-            case 2:
+            case 3:
                 c = Date.class;
                 break;
-            case 3:
+            case 4:
                 c = Character.class;
                 break;
-            case 0, 1, 4:
+            case 6:
+                c = Boolean.class;
+                break;
+            case 0, 1, 2, 5, 7:
             default:
                 c = String.class;
         }

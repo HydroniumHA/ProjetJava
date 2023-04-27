@@ -2,8 +2,7 @@ package business;
 
 import dataAccess.PersonDBAccess;
 import model.*;
-
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class PersonManager {
     private PersonDBAccess dao;
@@ -22,8 +21,8 @@ public class PersonManager {
         dao.deletePerson(nationalRegistrationNumber);
     }
 
-    public HashMap<Person, String> getAllPersons(String bikeID) throws AllPersonsException {
+    public ArrayList<Person> getAllPersons() throws AllPersonsException {
         //TESTS A FAIRE !!!
-        return dao.getAllPersons(bikeID);
+        return dao.getAllPersons();
     }
 }

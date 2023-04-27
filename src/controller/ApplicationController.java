@@ -2,6 +2,7 @@ package controller;
 
 import business.*;
 import model.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ApplicationController {
@@ -37,7 +38,7 @@ public class ApplicationController {
         return repairOrderManager.getAllRepairOrders(buildingID);
     }
 
-    public HashMap<Person, String> getAllPersons(String bikeID) throws AllPersonsException {
-        return personManager.getAllPersons(bikeID);
+    public ArrayList<Person> getAllPersons() throws AllPersonsException {
+        return personManager.getAllPersons();
     }
 }

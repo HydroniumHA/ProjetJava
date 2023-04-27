@@ -2,7 +2,7 @@ package dataAccess;
 
 import model.*;
 import java.sql.*;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class PersonDBAccess {
     public void addPerson(Person person) throws AddPersonException {
@@ -52,16 +52,16 @@ public class PersonDBAccess {
         }
     }
 
-    public HashMap<Person, String> getAllPersons(String bikeID) throws AllPersonsException {
+    public ArrayList<Person> getAllPersons() throws AllPersonsException {
         try {
             Connection connection = SingletonConnection.getInstance();
             String sql = "SELECT"; // !!!!! pas fini
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet data = statement.executeQuery();
-            HashMap<Person, String> allPersons = new HashMap<>();
+            ArrayList<Person> allPersons = new ArrayList<>();
             while (data.next()) {
                 Person person = new Person(data.getString("nationalRegistrationNumber"), data.getString("name"), data.getString("firstname"), data.getString("gender").charAt(0), data.getDate("birthdate").toLocalDate(), data.getString("email"), data.getString("phoneNumber"), data.getBoolean("wantsNewsLetter"), data.getString("addressID"));
-                allPersons.put(person, data.getString("bikeID"));
+                allPersons.add(person);
             }
             connection.close();
             return allPersons;
