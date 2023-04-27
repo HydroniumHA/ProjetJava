@@ -17,8 +17,8 @@ public class AllRepairOrdersModel extends AbstractTableModel {
         columnNames.add("BikeID");
         columnNames.add("Model");
         columnNames.add("Brand");
-        columnNames.add("purchaseDate");
-        columnNames.add("repairID");
+        columnNames.add("PurchaseDate");
+        columnNames.add("RepairID");
     }
 
     public int getColumnCount() {
