@@ -8,10 +8,10 @@ public class PersonDBAccess {
     public void addPerson(Person person) throws AddPersonException {
         try {
             Connection connection = SingletonConnection.getInstance();
-            String sql = "INSERT INTO person (nationalRegistrationNumber, name, firstname, gender, birthdate, wantsNewsLetter, addressID) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO person (nationalRegistrationNumber, lastName, firstname, gender, birthdate, wantsNewsLetter, addressID) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, person.getNationalRegistrationNumber());
-            statement.setString(2, person.getName());
+            statement.setString(2, person.getLastName());
             statement.setString(3, person.getFirstName());
             statement.setString(4, Character.toString(person.getGender()));
             java.sql.Date sqlDate = java.sql.Date.valueOf(person.getBirthdate());

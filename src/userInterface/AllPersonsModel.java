@@ -42,7 +42,7 @@ public class AllPersonsModel extends AbstractTableModel {
             case 0:
                 return person.getNationalRegistrationNumber();
             case 1:
-                return person.getName();
+                return person.getLastName();
             case 2:
                 return person.getFirstName();
             case 3:

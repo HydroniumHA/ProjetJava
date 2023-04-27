@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Person {
     private String nationalRegistrationNumber;
-    private String name;
+    private String lastName;
     private String firstName;
     private Character gender;
     private LocalDate birthdate;
@@ -13,9 +13,9 @@ public class Person {
     private Boolean wantsNewsLetter;
     private String addressID;
 
-    public Person(String nationalRegistrationNumber, String name, String firstName, Character gender, LocalDate birthdate, String email, String phoneNumber, Boolean wantsNewsLetter, String addressID) {
+    public Person(String nationalRegistrationNumber, String lastName, String firstName, Character gender, LocalDate birthdate, String email, String phoneNumber, Boolean wantsNewsLetter, String addressID) {
         setNationalRegistrationNumber(nationalRegistrationNumber);
-        setName(name);
+        setName(lastName);
         setFirstName(firstName);
         setGender(gender);
         setBirthdate(birthdate);
@@ -29,8 +29,8 @@ public class Person {
         this.nationalRegistrationNumber = nationalRegistrationNumber;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String lastName) {
+        this.lastName = lastName;
     }
 
     public void setFirstName(String firstName) {
@@ -65,8 +65,8 @@ public class Person {
         return nationalRegistrationNumber;
     }
 
-    public String getName() {
-        return name;
+    public String getLastName() {
+        return lastName;
     }
 
     public String getFirstName() {
