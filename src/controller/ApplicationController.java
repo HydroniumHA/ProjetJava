@@ -26,6 +26,10 @@ public class ApplicationController {
         addressManager.addAddress(address);
     }
 
+    public ArrayList<Person> getAllPersons() throws AllPersonsException {
+        return personManager.getAllPersons();
+    }
+
     public void deletePerson(String nationalRegistrationNumber) throws DeletePersonException {
         personManager.deletePerson(nationalRegistrationNumber);
     }
@@ -38,7 +42,7 @@ public class ApplicationController {
         return repairOrderManager.getAllRepairOrders(buildingID);
     }
 
-    public ArrayList<Person> getAllPersons() throws AllPersonsException {
-        return personManager.getAllPersons();
+    public HashMap<Address, String> getAddress(String cardID) throws AddressException {
+        return addressManager.getAddress(cardID);
     }
 }

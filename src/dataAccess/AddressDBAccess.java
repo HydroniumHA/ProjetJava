@@ -2,6 +2,7 @@ package dataAccess;
 
 import model.*;
 import java.sql.*;
+import java.util.HashMap;
 
 public class AddressDBAccess {
     public void addAddress(Address address) throws AddAddressException {
@@ -11,13 +12,32 @@ public class AddressDBAccess {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, address.getAddressID());
             statement.setString(2, address.getStreet());
-            statement.setInt(3, address.getNumber());
+            statement.setInt(3, address.getStreetNumber());
             statement.setString(4, address.getCityName());
             statement.setInt(5, address.getZip());
             statement.executeUpdate();
             connection.close();
         } catch (SQLException exception) {
             throw new AddAddressException();
+        }
+    }
+
+    public HashMap<Address, String> getAddress(String cardID) throws AddressException {
+        try {
+            Connection connection = SingletonConnection.getInstance();
+            String sql = "SELECT"; // !!!!! pas fini
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet data = statement.executeQuery();
+            HashMap<Address, String> allAddress = new HashMap<>();
+            Address address;
+            while (data.next()) {
+                address = new Address(data.getString("addressID"), data.getString("street"), data.getInt("streetNumber"), data.getString("cityName"), data.getInt("zip"));
+                allAddress.put(address, data.getString("subscriptionID"));
+            }
+            connection.close();
+            return allAddress;
+        } catch (SQLException exception) {
+            throw new AddressException();
         }
     }
 }

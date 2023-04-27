@@ -45,7 +45,7 @@ public class Address {
         return street;
     }
 
-    public Integer getNumber() {
+    public Integer getStreetNumber() {
         return streetNumber;
     }
 
