@@ -55,8 +55,8 @@ public class RegistrationButtonsPanel extends JPanel {
             Person person = new Person(formPanel.getNationalRegistrationNumber().getText(), formPanel.getLastName().getText(), formPanel.getFirstName().getText(), genderPanel.getGender(), LocalDate.now(), formPanel.getEmail().getText(), formPanel.getPhoneNumber().getText(), newsLetterPanel.getSelected(), address.getAddressID());
 
             try {
-                controller.addPerson(person);
                 controller.addAddress(address);
+                controller.addPerson(person);
             } catch (AddPersonException | AddAddressException exception) {
                 JOptionPane.showMessageDialog(null, exception, "Add Person Exception", JOptionPane.ERROR_MESSAGE);
             }
