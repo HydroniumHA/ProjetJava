@@ -10,12 +10,16 @@ public class ApplicationController {
     private AddressManager addressManager;
     private InvoiceManager invoiceManager;
     private RepairOrderManager repairOrderManager;
+    private SubscriptionManager subscriptionManager;
+    private CardManager cardManager;
 
     public ApplicationController() {
         this.personManager = new PersonManager();
         this.addressManager = new AddressManager();
         this.invoiceManager = new InvoiceManager();
         this.repairOrderManager = new RepairOrderManager();
+        this.subscriptionManager = new SubscriptionManager();
+        this.cardManager = new CardManager();
     }
 
     public void addPerson(Person person) throws AddPersonException {
@@ -44,5 +48,13 @@ public class ApplicationController {
 
     public HashMap<Address, String> getAddress(String cardID) throws AddressException {
         return addressManager.getAddress(cardID);
+    }
+
+    public void addSubscription(Subscription subscription) throws AddSubscriptionException {
+        subscriptionManager.addSubscription(subscription);
+    }
+
+    public void addCard(Card card) throws AddCardException {
+        cardManager.addCard(card);
     }
 }

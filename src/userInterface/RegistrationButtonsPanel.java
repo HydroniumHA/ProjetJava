@@ -54,11 +54,15 @@ public class RegistrationButtonsPanel extends JPanel {
             int month = Integer.parseInt(birthdate.substring(3, 5));
             int day = Integer.parseInt(birthdate.substring(0, 2));
             Person person = new Person(formPanel.getNationalRegistrationNumber().getText(), formPanel.getLastName().getText(), formPanel.getFirstName().getText(), genderPanel.getGender(), LocalDate.of(year, month, day), formPanel.getEmail().getText(), formPanel.getPhoneNumber().getText(), newsLetterPanel.getSelected(), address.getAddressID());
+            Subscription subscription = new Subscription(UUID.randomUUID().toString(), LocalDate.now(), 31, null, person.getNationalRegistrationNumber());
+            Card card = new Card(UUID.randomUUID().toString(), LocalDate.now(), subscription.getSubscriptionID());
 
             try {
                 controller.addAddress(address);
                 controller.addPerson(person);
-            } catch (AddPersonException | AddAddressException exception) {
+                controller.addSubscription(subscription);
+                controller.addCard(card);
+            } catch (AddPersonException | AddAddressException | AddSubscriptionException | AddCardException exception) {
                 JOptionPane.showMessageDialog(null, exception, "Add Person Exception", JOptionPane.ERROR_MESSAGE);
             }
         }
