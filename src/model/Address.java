@@ -1,7 +1,5 @@
 package model;
 
-import java.util.UUID;
-
 public class Address {
     private String addressID;
     private String street;
