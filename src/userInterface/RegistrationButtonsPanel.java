@@ -47,10 +47,13 @@ public class RegistrationButtonsPanel extends JPanel {
             FormPanel formPanel = registrationForm.getFormPanel();
             GenderPanel genderPanel = registrationForm.getFormPanel().getGenderPanel();
             NewsLetterPanel newsLetterPanel = registrationForm.getFormPanel().getNewsLetterPanel();
+            String birthdate = formPanel.getBirthdate().getText();
             //Valider les données ici !!!
             Address address = new Address(UUID.randomUUID().toString(), formPanel.getStreet().getText(), Integer.parseInt(formPanel.getNumber().getText()), formPanel.getCityName().getText(), Integer.parseInt(formPanel.getZip().getText()));
-            //Mettre date correcte dans person !!!
-            Person person = new Person(formPanel.getNationalRegistrationNumber().getText(), formPanel.getLastName().getText(), formPanel.getFirstName().getText(), genderPanel.getGender(), LocalDate.now(), formPanel.getEmail().getText(), formPanel.getPhoneNumber().getText(), newsLetterPanel.getSelected(), address.getAddressID());
+            int year = Integer.parseInt(birthdate.substring(6, 10));
+            int month = Integer.parseInt(birthdate.substring(3, 5));
+            int day = Integer.parseInt(birthdate.substring(0, 2));
+            Person person = new Person(formPanel.getNationalRegistrationNumber().getText(), formPanel.getLastName().getText(), formPanel.getFirstName().getText(), genderPanel.getGender(), LocalDate.of(year, month, day), formPanel.getEmail().getText(), formPanel.getPhoneNumber().getText(), newsLetterPanel.getSelected(), address.getAddressID());
 
             try {
                 controller.addAddress(address);
