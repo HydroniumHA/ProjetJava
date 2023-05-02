@@ -6,8 +6,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class FormPanel extends JPanel {
-    private JLabel nationalRegistrationNumberLabel, nameLabel, firstNameLabel, genderLabel, birthdateLabel, emailLabel, phoneNumberLabel, streetLabel, streetNumberLabel, cityNameLabel, zipLabel, newsLetterLabel;
-    private JTextField nationalRegistrationNumber, name, firstName, email, phoneNumber, street, streetNumber, cityName, zip;
+    private JLabel nationalRegistrationNumberLabel, lastNameLabel, firstNameLabel, genderLabel, birthdateLabel, emailLabel, phoneNumberLabel, streetLabel, streetNumberLabel, cityNameLabel, zipLabel, newsLetterLabel;
+    private JTextField nationalRegistrationNumber, lastName, firstName, email, phoneNumber, street, streetNumber, cityName, zip;
     private JFormattedTextField birthdate;
     private GenderPanel genderPanel;
     private NewsLetterPanel newsLetterPanel;
@@ -22,11 +22,11 @@ public class FormPanel extends JPanel {
         this.add(nationalRegistrationNumber);
         this.add(new Panel());
 
-        nameLabel = new JLabel("Name :");
-        nameLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        name = new JTextField();
-        this.add(nameLabel);
-        this.add(name);
+        lastNameLabel = new JLabel("Name :");
+        lastNameLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+        lastName = new JTextField();
+        this.add(lastNameLabel);
+        this.add(lastName);
         this.add(new Panel());
 
         firstNameLabel = new JLabel("First name :");
@@ -106,7 +106,7 @@ public class FormPanel extends JPanel {
     }
 
     public JTextField getLastName() {
-        return name;
+        return lastName;
     }
 
     public JTextField getFirstName() {
@@ -151,7 +151,7 @@ public class FormPanel extends JPanel {
 
     public void setInitialAll() {
         nationalRegistrationNumber.setText("");
-        name.setText("");
+        lastName.setText("");
         firstName.setText("");
         genderPanel.setInitialAll();
         birthdate.setText("");
