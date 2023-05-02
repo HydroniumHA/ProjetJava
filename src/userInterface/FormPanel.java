@@ -22,14 +22,14 @@ public class FormPanel extends JPanel {
         this.add(nationalRegistrationNumber);
         this.add(new Panel());
 
-        lastNameLabel = new JLabel("Name :");
+        lastNameLabel = new JLabel("Lastname :");
         lastNameLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         lastName = new JTextField();
         this.add(lastNameLabel);
         this.add(lastName);
         this.add(new Panel());
 
-        firstNameLabel = new JLabel("First name :");
+        firstNameLabel = new JLabel("Firstname :");
         firstNameLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         firstName = new JTextField();
         this.add(firstNameLabel);
@@ -45,7 +45,7 @@ public class FormPanel extends JPanel {
 
         birthdateLabel = new JLabel("Birthdate :");
         birthdateLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        DateFormat format = new SimpleDateFormat("dd/MM/yy");
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         birthdate = new JFormattedTextField(format);
         this.add(birthdateLabel);
         this.add(birthdate);
