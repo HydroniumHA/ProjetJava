@@ -1,11 +1,11 @@
 package business;
 
-import dataAccess.RepairOrderDBAccess;
+import dataAccess.*;
 import model.*;
 import java.util.HashMap;
 
 public class RepairOrderManager {
-    private RepairOrderDBAccess dao;
+    private RepairOrderDataAccess dao;
 
     public RepairOrderManager() {
         this.dao = new RepairOrderDBAccess();

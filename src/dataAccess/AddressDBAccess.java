@@ -4,7 +4,7 @@ import model.*;
 import java.sql.*;
 import java.util.HashMap;
 
-public class AddressDBAccess {
+public class AddressDBAccess implements AddressDataAccess {
     public void addAddress(Address address) throws AddAddressException {
         try {
             Connection connection = SingletonConnection.getInstance();

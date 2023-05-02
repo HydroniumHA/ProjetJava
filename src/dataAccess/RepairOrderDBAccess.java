@@ -4,7 +4,7 @@ import model.*;
 import java.sql.*;
 import java.util.HashMap;
 
-public class RepairOrderDBAccess {
+public class RepairOrderDBAccess implements RepairOrderDataAccess {
     public HashMap<Bike, String> getAllRepairOrders(String buildingID) throws AllRepairOrdersException {
         try {
             Connection connection = SingletonConnection.getInstance();

@@ -1,11 +1,11 @@
 package business;
 
-import dataAccess.PersonDBAccess;
+import dataAccess.*;
 import model.*;
 import java.util.ArrayList;
 
 public class PersonManager {
-    private PersonDBAccess dao;
+    private PersonDataAccess dao;
 
     public PersonManager() {
         this.dao = new PersonDBAccess();

@@ -1,12 +1,11 @@
 package business;
 
-import dataAccess.AddressDBAccess;
+import dataAccess.*;
 import model.*;
-
 import java.util.HashMap;
 
 public class AddressManager {
-    private AddressDBAccess dao;
+    private AddressDataAccess dao;
 
     public AddressManager() {
         this.dao = new AddressDBAccess();

@@ -4,7 +4,7 @@ import model.*;
 import java.sql.*;
 import java.util.HashMap;
 
-public class InvoiceDBAccess {
+public class InvoiceDBAccess implements InvoiceDataAccess {
     public HashMap<Invoice, String> getAllInvoices(String cityName, double minAmount) throws AllInvoicesException {
         try {
             Connection connection = SingletonConnection.getInstance();

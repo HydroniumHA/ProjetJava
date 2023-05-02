@@ -4,7 +4,7 @@ import model.*;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class PersonDBAccess {
+public class PersonDBAccess implements PersonDataAccess {
     public void addPerson(Person person) throws AddPersonException {
         try {
             Connection connection = SingletonConnection.getInstance();
