@@ -28,9 +28,7 @@ public class MenuWindow extends JFrame {
         mainContainer = this.getContentPane();
         mainContainer.setLayout(new BorderLayout());
 
-        JLabel text = new JLabel("Welcome to the Libiavelo management software.");
-        text.setHorizontalAlignment(SwingConstants.CENTER);
-        mainContainer.add(text, BorderLayout.CENTER);
+        mainContainer.add(new WelcomePanel(), BorderLayout.CENTER);
 
         menuBar = new JMenuBar();
         setJMenuBar(menuBar);

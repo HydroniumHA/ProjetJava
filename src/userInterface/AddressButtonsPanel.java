@@ -34,9 +34,7 @@ public class AddressButtonsPanel extends JPanel {
     private class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             addressForm.removeAll();
-            JLabel text = new JLabel("Welcome to the Libiavelo management software.");
-            text.setHorizontalAlignment(SwingConstants.CENTER);
-            addressForm.add(text);
+            addressForm.add(new WelcomePanel());
             addressForm.revalidate();
             addressForm.repaint();
         }

@@ -34,9 +34,7 @@ public class RemoveButtonsPanel extends JPanel {
     private class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             removeForm.removeAll();
-            JLabel text = new JLabel("Welcome to the Libiavelo management software.");
-            text.setHorizontalAlignment(SwingConstants.CENTER);
-            removeForm.add(text);
+            removeForm.add(new WelcomePanel());
             removeForm.revalidate();
             removeForm.repaint();
         }

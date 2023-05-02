@@ -36,9 +36,7 @@ public class RegistrationButtonsPanel extends JPanel {
     private class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             registrationForm.removeAll();
-            JLabel text = new JLabel("Welcome to the Libiavelo management software.");
-            text.setHorizontalAlignment(SwingConstants.CENTER);
-            registrationForm.add(text);
+            registrationForm.add(new WelcomePanel());
             registrationForm.revalidate();
             registrationForm.repaint();
         }
