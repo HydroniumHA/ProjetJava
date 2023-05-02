@@ -16,7 +16,6 @@ public class AddressDBAccess {
             statement.setString(4, address.getCityName());
             statement.setInt(5, address.getZip());
             statement.executeUpdate();
-            connection.close();
         } catch (SQLException exception) {
             throw new AddAddressException();
         }
@@ -34,7 +33,6 @@ public class AddressDBAccess {
                 address = new Address(data.getString("addressID"), data.getString("street"), data.getInt("streetNumber"), data.getString("cityName"), data.getInt("zip"));
                 allAddress.put(address, data.getString("subscriptionID"));
             }
-            connection.close();
             return allAddress;
         } catch (SQLException exception) {
             throw new AddressException();

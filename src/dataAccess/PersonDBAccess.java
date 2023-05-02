@@ -14,8 +14,7 @@ public class PersonDBAccess {
             statement.setString(2, person.getLastName());
             statement.setString(3, person.getFirstName());
             statement.setString(4, Character.toString(person.getGender()));
-            java.sql.Date sqlDate = java.sql.Date.valueOf(person.getBirthdate());
-            statement.setDate(5, sqlDate);
+            statement.setDate(5, java.sql.Date.valueOf(person.getBirthdate()));
             statement.setBoolean(6, person.getWantsNewsLetter());
             statement.setString(7, person.getAddressID());
             statement.executeUpdate();
@@ -33,7 +32,6 @@ public class PersonDBAccess {
                 statement.setString(2, person.getNationalRegistrationNumber());
                 statement.executeUpdate();
             }
-            connection.close();
         } catch (SQLException exception) {
             throw new AddPersonException();
         }
@@ -46,7 +44,6 @@ public class PersonDBAccess {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, nationalRegistrationNumber);
             statement.executeUpdate();
-            connection.close();
         } catch (SQLException exception) {
             throw new DeletePersonException();
         }
@@ -63,7 +60,6 @@ public class PersonDBAccess {
                 Person person = new Person(data.getString("nationalRegistrationNumber"), data.getString("name"), data.getString("firstname"), data.getString("gender").charAt(0), data.getDate("birthdate").toLocalDate(), data.getString("email"), data.getString("phoneNumber"), data.getBoolean("wantsNewsLetter"), data.getString("addressID"));
                 allPersons.add(person);
             }
-            connection.close();
             return allPersons;
         } catch (SQLException exception) {
             throw new AllPersonsException();

@@ -17,7 +17,6 @@ public class InvoiceDBAccess {
                 invoice = new Invoice(data.getString("documentID"), data.getDate("invoiceDate").toLocalDate(), data.getDouble("totalPriceWithoutVAT"), data.getDouble("totalPriceIncludingVAT"), data.getBoolean("isPaid"), data.getString("subscriptionID"));
                 allInvoices.put(invoice, data.getString("name"));
             }
-            connection.close();
             return allInvoices;
         } catch (SQLException exception) {
             throw new AllInvoicesException();

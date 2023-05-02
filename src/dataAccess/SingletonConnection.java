@@ -9,7 +9,7 @@ public class SingletonConnection {
     public static Connection getInstance() {
         if (uniqueConnection == null) {
             try {
-                uniqueConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/libiavelodb","root","mdpBD");
+                uniqueConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/libiavelodb","root","Xps923cr");
             } catch (SQLException exception) {
                 JOptionPane.showMessageDialog(null, exception, "SQL Error", JOptionPane.ERROR_MESSAGE);
             }

@@ -16,7 +16,6 @@ public class RepairOrderDBAccess {
                 Bike bike = new Bike(data.getString("bikeID"), data.getString("model"), data.getString("brand"), data.getDate("purchaseDate").toLocalDate(), data.getDouble("value"), data.getBoolean("isDeclassified"));
                 allRepairOrders.put(bike, data.getString("repairID"));
             }
-            connection.close();
             return allRepairOrders;
         } catch (SQLException exception) {
             throw new AllRepairOrdersException();
