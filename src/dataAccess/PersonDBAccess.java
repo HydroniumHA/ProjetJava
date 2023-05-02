@@ -52,7 +52,7 @@ public class PersonDBAccess implements PersonDataAccess {
     public ArrayList<Person> getAllPersons() throws AllPersonsException {
         try {
             Connection connection = SingletonConnection.getInstance();
-            String sql = "SELECT"; // !!!!! pas fini
+            String sql = "SELECT * FROM person";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet data = statement.executeQuery();
             ArrayList<Person> allPersons = new ArrayList<>();
