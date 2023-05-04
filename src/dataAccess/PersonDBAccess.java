@@ -57,7 +57,7 @@ public class PersonDBAccess implements PersonDataAccess {
             ResultSet data = statement.executeQuery();
             ArrayList<Person> allPersons = new ArrayList<>();
             while (data.next()) {
-                Person person = new Person(data.getString("nationalRegistrationNumber"), data.getString("name"), data.getString("firstname"), data.getString("gender").charAt(0), data.getDate("birthdate").toLocalDate(), data.getString("email"), data.getString("phoneNumber"), data.getBoolean("wantsNewsLetter"), data.getString("addressID"));
+                Person person = new Person(data.getString("nationalRegistrationNumber"), data.getString("lastName"), data.getString("firstname"), data.getString("gender").charAt(0), data.getDate("birthdate").toLocalDate(), data.getString("email"), data.getString("phoneNumber"), data.getBoolean("wantsNewsLetter"), data.getString("addressID"));
                 allPersons.add(person);
             }
             return allPersons;
