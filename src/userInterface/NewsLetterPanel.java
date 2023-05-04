@@ -23,6 +23,12 @@ public class NewsLetterPanel extends JPanel {
         return accept.isSelected();
     }
 
+    public void setSelected(boolean wantsNewsLetter) {
+        if (wantsNewsLetter) {
+            accept.setSelected(true);
+        }
+    }
+
     public void setInitialAll() {
         buttonGroup.clearSelection();
     }

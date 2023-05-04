@@ -24,4 +24,9 @@ public class PersonManager {
     public ArrayList<Person> getAllPersons() throws AllPersonsException {
         return dao.getAllPersons();
     }
+
+    public void updatePerson(Person person) throws UpdatePersonException {
+        //TESTS A FAIRE !!!
+        dao.updatePerson(person);
+    }
 }

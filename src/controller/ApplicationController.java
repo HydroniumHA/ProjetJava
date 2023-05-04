@@ -57,4 +57,8 @@ public class ApplicationController {
     public void addCard(Card card) throws AddCardException {
         cardManager.addCard(card);
     }
+
+    public void updatePerson(Person person) throws UpdatePersonException {
+        personManager.updatePerson(person);
+    }
 }

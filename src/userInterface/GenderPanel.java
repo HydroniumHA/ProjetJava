@@ -32,6 +32,20 @@ public class GenderPanel extends JPanel {
         return 'O';
     }
 
+    public void setSelected(char gender) {
+        switch (gender) {
+            case 'M':
+                male.setSelected(true);
+                break;
+            case 'F':
+                female.setSelected(true);
+                break;
+            case 'O':
+                other.setSelected(true);
+                break;
+        }
+    }
+
     public void setInitialAll() {
         buttonGroup.clearSelection();
     }

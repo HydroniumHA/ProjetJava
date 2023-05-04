@@ -48,22 +48,27 @@ public class RegistrationButtonsPanel extends JPanel {
             GenderPanel genderPanel = registrationForm.getFormPanel().getGenderPanel();
             NewsLetterPanel newsLetterPanel = registrationForm.getFormPanel().getNewsLetterPanel();
             String birthdate = formPanel.getBirthdate().getText();
-            //Valider les données ici !!!
-            Address address = new Address(UUID.randomUUID().toString(), formPanel.getStreet().getText(), Integer.parseInt(formPanel.getNumber().getText()), formPanel.getCityName().getText(), Integer.parseInt(formPanel.getZip().getText()));
             int year = Integer.parseInt(birthdate.substring(6, 10));
             int month = Integer.parseInt(birthdate.substring(3, 5));
             int day = Integer.parseInt(birthdate.substring(0, 2));
-            Person person = new Person(formPanel.getNationalRegistrationNumber().getText(), formPanel.getLastName().getText(), formPanel.getFirstName().getText(), genderPanel.getGender(), LocalDate.of(year, month, day), formPanel.getEmail().getText(), formPanel.getPhoneNumber().getText(), newsLetterPanel.getSelected(), address.getAddressID());
-            Subscription subscription = new Subscription(UUID.randomUUID().toString(), LocalDate.now(), 31, null, person.getNationalRegistrationNumber());
-            Card card = new Card(UUID.randomUUID().toString(), LocalDate.now(), subscription.getSubscriptionID());
+            //Valider les données ici !!!
 
             try {
-                controller.addAddress(address);
-                controller.addPerson(person);
-                controller.addSubscription(subscription);
-                controller.addCard(card);
-            } catch (AddPersonException | AddAddressException | AddSubscriptionException | AddCardException exception) {
-                JOptionPane.showMessageDialog(null, exception, "Add Person Exception", JOptionPane.ERROR_MESSAGE);
+                if (!registrationForm.getFormPanel().getStreet().getText().equals("")) {
+                    Address address = new Address(UUID.randomUUID().toString(), formPanel.getStreet().getText(), Integer.parseInt(formPanel.getNumber().getText()), formPanel.getCityName().getText(), Integer.parseInt(formPanel.getZip().getText()));
+                    Person person = new Person(formPanel.getNationalRegistrationNumber().getText(), formPanel.getLastName().getText(), formPanel.getFirstName().getText(), genderPanel.getGender(), LocalDate.of(year, month, day), formPanel.getEmail().getText(), formPanel.getPhoneNumber().getText(), newsLetterPanel.getSelected(), address.getAddressID());
+                    Subscription subscription = new Subscription(UUID.randomUUID().toString(), LocalDate.now(), 31, null, person.getNationalRegistrationNumber());
+                    Card card = new Card(UUID.randomUUID().toString(), LocalDate.now(), subscription.getSubscriptionID());
+                    controller.addAddress(address);
+                    controller.addPerson(person);
+                    controller.addSubscription(subscription);
+                    controller.addCard(card);
+                } else {
+                    Person person = new Person(formPanel.getNationalRegistrationNumber().getText(), formPanel.getLastName().getText(), formPanel.getFirstName().getText(), genderPanel.getGender(), LocalDate.of(year, month, day), formPanel.getEmail().getText(), formPanel.getPhoneNumber().getText(), newsLetterPanel.getSelected(),null);
+                    controller.updatePerson(person);
+                }
+            } catch (AddPersonException | AddAddressException | AddSubscriptionException | AddCardException | UpdatePersonException exception) {
+                JOptionPane.showMessageDialog(null, exception, "Person Exception", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

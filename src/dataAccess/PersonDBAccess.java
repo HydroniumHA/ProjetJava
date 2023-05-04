@@ -18,14 +18,14 @@ public class PersonDBAccess implements PersonDataAccess {
             statement.setBoolean(6, person.getWantsNewsLetter());
             statement.setString(7, person.getAddressID());
             statement.executeUpdate();
-            if (person.getEmail() != null) {
+            if (!person.getEmail().equals("")) {
                 sql = "UPDATE person SET email = ? WHERE nationalRegistrationNumber = ?";
                 statement = connection.prepareStatement(sql);
                 statement.setString(1, person.getEmail());
                 statement.setString(2, person.getNationalRegistrationNumber());
                 statement.executeUpdate();
             }
-            if (person.getPhoneNumber() != null) {
+            if (!person.getPhoneNumber().equals("")) {
                 sql = "UPDATE person SET phoneNumber = ? WHERE nationalRegistrationNumber = ?";
                 statement = connection.prepareStatement(sql);
                 statement.setString(1, person.getPhoneNumber());
@@ -63,6 +63,38 @@ public class PersonDBAccess implements PersonDataAccess {
             return allPersons;
         } catch (SQLException exception) {
             throw new AllPersonsException();
+        }
+    }
+
+    public void updatePerson(Person person) throws UpdatePersonException {
+        try {
+            Connection connection = SingletonConnection.getInstance();
+            String sql = "UPDATE person SET nationalRegistrationNumber = ?, lastName = ?, firstname = ?, gender = ?, birthdate = ?, wantsNewsLetter = ? WHERE nationalRegistrationNumber = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, person.getNationalRegistrationNumber());
+            statement.setString(2, person.getLastName());
+            statement.setString(3, person.getFirstName());
+            statement.setString(4, Character.toString(person.getGender()));
+            statement.setDate(5, java.sql.Date.valueOf(person.getBirthdate()));
+            statement.setBoolean(6, person.getWantsNewsLetter());
+            statement.setString(7, person.getNationalRegistrationNumber());
+            statement.executeUpdate();
+            if (!person.getEmail().equals("")) {
+                sql = "UPDATE person SET email = ? WHERE nationalRegistrationNumber = ?";
+                statement = connection.prepareStatement(sql);
+                statement.setString(1, person.getEmail());
+                statement.setString(2, person.getNationalRegistrationNumber());
+                statement.executeUpdate();
+            }
+            if (!person.getPhoneNumber().equals("")) {
+                sql = "UPDATE person SET phoneNumber = ? WHERE nationalRegistrationNumber = ?";
+                statement = connection.prepareStatement(sql);
+                statement.setString(1, person.getPhoneNumber());
+                statement.setString(2, person.getNationalRegistrationNumber());
+                statement.executeUpdate();
+            }
+        } catch (SQLException exception) {
+            throw new UpdatePersonException();
         }
     }
 }

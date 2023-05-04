@@ -149,6 +149,45 @@ public class FormPanel extends JPanel {
         return newsLetterPanel;
     }
 
+    public void setNationalRegistrationNumber(String text) {
+        nationalRegistrationNumber.setText(text);
+    }
+
+    public void setLastName(String text) {
+        lastName.setText(text);
+    }
+
+    public void setFirstName(String text) {
+        firstName.setText(text);
+    }
+
+    public void setEmail(String text) {
+        email.setText(text);
+    }
+
+    public void setPhoneNumber(String text) {
+        phoneNumber.setText(text);
+    }
+
+    public void setBirthdate(String text) {
+        birthdate.setText(text);
+    }
+
+    public void setGender(char gender) {
+        genderPanel.setSelected(gender);
+    }
+
+    public void setNewsLetter(boolean wantsNewsLetter) {
+        newsLetterPanel.setSelected(wantsNewsLetter);
+    }
+
+    public void setAddressNonEditable() {
+        street.setEditable(false);
+        streetNumber.setEditable(false);
+        cityName.setEditable(false);
+        zip.setEditable(false);
+    }
+
     public void setInitialAll() {
         nationalRegistrationNumber.setText("");
         lastName.setText("");

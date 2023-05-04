@@ -14,13 +14,14 @@ public class AllPersonsModel extends AbstractTableModel {
         contents = new ArrayList<>(persons);
         columnNames = new ArrayList<>();
         columnNames.add("NationalRegistrationNumber");
-        columnNames.add("Name");
+        columnNames.add("Lastname");
         columnNames.add("Firstname");
         columnNames.add("Birthdate");
         columnNames.add("Gender");
         columnNames.add("Email");
         columnNames.add("WantsNewsLetter");
         columnNames.add("PhoneNumber");
+        columnNames.add("AddressID");
     }
 
     public int getColumnCount() {
@@ -55,6 +56,8 @@ public class AllPersonsModel extends AbstractTableModel {
                 return person.getWantsNewsLetter();
             case 7:
                 return person.getPhoneNumber();
+            case 8:
+                return person.getAddressID();
             default:
                 return null;
         }
@@ -73,7 +76,7 @@ public class AllPersonsModel extends AbstractTableModel {
             case 6:
                 c = Boolean.class;
                 break;
-            case 0, 1, 2, 5, 7:
+            case 0, 1, 2, 5, 7, 8:
             default:
                 c = String.class;
         }

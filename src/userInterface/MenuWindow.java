@@ -1,11 +1,16 @@
 package userInterface;
 
 import controller.ApplicationController;
+import model.AddressException;
 import model.AllPersonsException;
 
 import javax.swing.*;
+import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 public class MenuWindow extends JFrame {
     private JMenuBar menuBar;
@@ -121,8 +126,33 @@ public class MenuWindow extends JFrame {
             try {
                 AllPersonsModel model = new AllPersonsModel(controller.getAllPersons());
                 JTable table = new JTable(model);
+                table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
                 JScrollPane scrollPane = new JScrollPane(table);
+                table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+                    public void valueChanged(ListSelectionEvent e) {
+                        mainContainer.removeAll();
+                        int i = table.getSelectedRow();
+                        RegistrationForm registrationForm = new RegistrationForm();
+
+                        registrationForm.getFormPanel().setNationalRegistrationNumber((String)model.getValueAt(i,0));
+                        registrationForm.getFormPanel().setLastName((String)model.getValueAt(i,1));
+                        registrationForm.getFormPanel().setFirstName((String)model.getValueAt(i,2));
+                        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                        registrationForm.getFormPanel().setBirthdate(format.format(model.getValueAt(i,3)));
+                        registrationForm.getFormPanel().setGender((char)model.getValueAt(i,4));
+                        registrationForm.getFormPanel().setEmail((String)model.getValueAt(i,5));
+                        registrationForm.getFormPanel().setNewsLetter((boolean)model.getValueAt(i,6));
+                        registrationForm.getFormPanel().setPhoneNumber((String)model.getValueAt(i,7));
+                        registrationForm.getFormPanel().setAddressNonEditable();
+                        mainContainer.add(registrationForm);
+                        revalidate();
+                        repaint();
+                    }
+                });
                 mainContainer.add(scrollPane, BorderLayout.CENTER);
+                JLabel text = new JLabel("Click on a row to modify.");
+                text.setHorizontalAlignment(SwingConstants.CENTER);
+                mainContainer.add(text, BorderLayout.SOUTH);
             } catch (AllPersonsException exception) {
                 JOptionPane.showMessageDialog(null, exception,"All Persons Exception", JOptionPane.ERROR_MESSAGE);
             }
