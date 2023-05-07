@@ -2,19 +2,20 @@ package dataAccess;
 
 import model.*;
 import java.sql.*;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class RepairOrderDBAccess implements RepairOrderDataAccess {
-    public HashMap<Bike, String> getAllRepairOrders(String buildingID) throws AllRepairOrdersException {
+    public ArrayList<RepairOrder> getAllRepairOrders(String buildingID) throws AllRepairOrdersException {
         try {
             Connection connection = SingletonConnection.getInstance();
             String sql = "SELECT"; // !!!!! pas fini
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet data = statement.executeQuery();
-            HashMap<Bike, String> allRepairOrders = new HashMap<>();
+            ArrayList<RepairOrder> allRepairOrders = new ArrayList<>();
+            RepairOrder repairOrder;
             while (data.next()) {
-                Bike bike = new Bike(data.getString("bikeID"), data.getString("model"), data.getString("brand"), data.getDate("purchaseDate").toLocalDate(), data.getDouble("value"), data.getBoolean("isDeclassified"));
-                allRepairOrders.put(bike, data.getString("repairID"));
+                repairOrder = new RepairOrder(data.getString("repairID"), data.getDate("issueDate").toLocalDate(), data.getDate("repairDate").toLocalDate(), data.getString("comments"), data.getString("bikeID"));
+                allRepairOrders.add(repairOrder);
             }
             return allRepairOrders;
         } catch (SQLException exception) {

@@ -2,6 +2,7 @@ package controller;
 
 import business.*;
 import model.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,6 +13,7 @@ public class ApplicationController {
     private RepairOrderManager repairOrderManager;
     private SubscriptionManager subscriptionManager;
     private CardManager cardManager;
+    private JobTask jobTask;
 
     public ApplicationController() {
         this.personManager = new PersonManager();
@@ -20,6 +22,7 @@ public class ApplicationController {
         this.repairOrderManager = new RepairOrderManager();
         this.subscriptionManager = new SubscriptionManager();
         this.cardManager = new CardManager();
+        this.jobTask = new JobTask();
     }
 
     public void addPerson(Person person) throws AddPersonException {
@@ -42,7 +45,7 @@ public class ApplicationController {
         return invoiceManager.getAllInvoices(cityName, minAmount);
     }
 
-    public HashMap<Bike, String> getAllRepairOrders(String buildingID) throws AllRepairOrdersException {
+    public ArrayList<RepairOrder> getAllRepairOrders(String buildingID) throws AllRepairOrdersException {
         return repairOrderManager.getAllRepairOrders(buildingID);
     }
 
@@ -60,5 +63,9 @@ public class ApplicationController {
 
     public void updatePerson(Person person) throws UpdatePersonException {
         personManager.updatePerson(person);
+    }
+
+    public HashMap<String, Double> getJobTaskInfos(int month, int year) throws AllBuildingsException, AllRepairOrdersException {
+        return jobTask.getJobTaskInfos(month, year);
     }
 }

@@ -10,12 +10,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 
 public class MenuWindow extends JFrame {
     private JMenuBar menuBar;
-    private JMenu fileMenu, customerMenu, queriesMenu, helpMenu;
-    private JMenuItem exit, signUp, modifications, remove, invoices, repairOrders, address, about;
+    private JMenu fileMenu, customerMenu, managementMenu, queriesMenu, helpMenu;
+    private JMenuItem exit, signUp, modifications, remove, jobTask, invoices, repairOrders, address, about;
     private Container mainContainer;
     private ApplicationController controller;
 
@@ -69,6 +68,15 @@ public class MenuWindow extends JFrame {
         customerMenu.add(remove);
         RemoveListener removeListener = new RemoveListener();
         remove.addActionListener(removeListener);
+
+        managementMenu = new JMenu("Management");
+        managementMenu.setMnemonic('M');
+        menuBar.add(managementMenu);
+
+        jobTask = new JMenuItem("JobTask");
+        managementMenu.add(jobTask);
+        JobTaskListener jobTaskListener = new JobTaskListener();
+        jobTask.addActionListener(jobTaskListener);
 
         queriesMenu = new JMenu("Queries");
         queriesMenu.setMnemonic('Q');
@@ -165,6 +173,15 @@ public class MenuWindow extends JFrame {
         public void actionPerformed(ActionEvent event) {
             mainContainer.removeAll();
             mainContainer.add(new RemoveForm(), BorderLayout.CENTER);
+            revalidate();
+            repaint();
+        }
+    }
+
+    private class JobTaskListener implements ActionListener {
+        public void actionPerformed(ActionEvent event) {
+            mainContainer.removeAll();
+            mainContainer.add(new JobTaskForm(), BorderLayout.CENTER);
             revalidate();
             repaint();
         }
