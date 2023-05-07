@@ -15,7 +15,7 @@ public class InvoiceDBAccess implements InvoiceDataAccess {
             Invoice invoice;
             while (data.next()) {
                 invoice = new Invoice(data.getString("documentID"), data.getDate("invoiceDate").toLocalDate(), data.getDouble("totalPriceWithoutVAT"), data.getDouble("totalPriceIncludingVAT"), data.getBoolean("isPaid"), data.getString("subscriptionID"));
-                allInvoices.put(invoice, data.getString("name"));
+                allInvoices.put(invoice, data.getString("lastName"));
             }
             return allInvoices;
         } catch (SQLException exception) {
