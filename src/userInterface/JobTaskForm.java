@@ -11,7 +11,7 @@ public class JobTaskForm extends JPanel {
         this.setLayout(new BorderLayout());
 
         jobTaskPanel = new JobTaskPanel();
-        jobTaskButtonsPanel = new InvoicesButtonsPanel(this);
+        jobTaskButtonsPanel = new JobTaskButtonsPanel(this);
         this.add(jobTaskPanel, BorderLayout.CENTER);
         this.add(jobTaskButtonsPanel, BorderLayout.SOUTH);
     }
