@@ -9,7 +9,10 @@ public class WelcomePanel extends JPanel {
     public WelcomePanel() {
         this.setLayout(new BorderLayout());
 
-        text = new JLabel("Welcome to the Libiavelo management software.");
+        text = new JLabel(
+            "<html><h1 style=\"text-align:center;\"><img src=\""
+                + WelcomePanel.class.getResource("/libiaveloLogo.png")
+                + "\"><br><br>Welcome to the Libiavelo management software.</h1></html>");
         text.setHorizontalAlignment(SwingConstants.CENTER);
         this.add(text, BorderLayout.CENTER);
     }
