@@ -5,7 +5,6 @@ import javax.swing.table.AbstractTableModel;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 public class AllRepairOrdersModel extends AbstractTableModel {
     private ArrayList<String> columnNames;
