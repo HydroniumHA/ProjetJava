@@ -6,38 +6,26 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class AddressButtonsPanel extends JPanel {
-    private JButton back, validation, reset;
+public class AddressButtonsPanel extends ButtonsPanel {
+    private JButton validation, reset;
     private AddressForm addressForm;
     private ApplicationController controller;
 
     public AddressButtonsPanel(AddressForm addressForm) {
-        this.controller = new ApplicationController();
+        super(addressForm);
         this.addressForm = addressForm;
+        this.controller = new ApplicationController();
 
         this.setLayout(new FlowLayout());
 
-        back = new JButton("Back");
         validation = new JButton("Validation");
         reset = new JButton("Reset");
-        this.add(back);
         this.add(validation);
         this.add(reset);
-        ButtonListener buttonListener = new ButtonListener();
-        back.addActionListener(buttonListener);
         ButtonListener2 buttonListener2 = new ButtonListener2();
         validation.addActionListener(buttonListener2);
         ButtonListener3 buttonListener3 = new ButtonListener3();
         reset.addActionListener(buttonListener3);
-    }
-
-    private class ButtonListener implements ActionListener {
-        public void actionPerformed(ActionEvent event) {
-            addressForm.removeAll();
-            addressForm.add(new WelcomePanel());
-            addressForm.revalidate();
-            addressForm.repaint();
-        }
     }
 
     private class ButtonListener2 implements ActionListener {

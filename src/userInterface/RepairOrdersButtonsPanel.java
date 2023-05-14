@@ -6,38 +6,26 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class RepairOrdersButtonsPanel extends JPanel {
-    private JButton back, validation, reset;
+public class RepairOrdersButtonsPanel extends ButtonsPanel {
+    private JButton validation, reset;
     private AllRepairOrdersForm allRepairOrdersForm;
     private ApplicationController controller;
 
     public RepairOrdersButtonsPanel(AllRepairOrdersForm allRepairOrdersForm) {
-        this.controller = new ApplicationController();
+        super(allRepairOrdersForm);
         this.allRepairOrdersForm = allRepairOrdersForm;
+        this.controller = new ApplicationController();
 
         this.setLayout(new FlowLayout());
 
-        back = new JButton("Back");
         validation = new JButton("Validation");
         reset = new JButton("Reset");
-        this.add(back);
         this.add(validation);
         this.add(reset);
-        ButtonListener buttonListener = new ButtonListener();
-        back.addActionListener(buttonListener);
         ButtonListener2 buttonListener2 = new ButtonListener2();
         validation.addActionListener(buttonListener2);
         ButtonListener3 buttonListener3 = new ButtonListener3();
         reset.addActionListener(buttonListener3);
-    }
-
-    private class ButtonListener implements ActionListener {
-        public void actionPerformed(ActionEvent event) {
-            allRepairOrdersForm.removeAll();
-            allRepairOrdersForm.add(new WelcomePanel());
-            allRepairOrdersForm.revalidate();
-            allRepairOrdersForm.repaint();
-        }
     }
 
     private class ButtonListener2 implements ActionListener {

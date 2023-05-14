@@ -8,38 +8,26 @@ import java.awt.event.*;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class RegistrationButtonsPanel extends JPanel {
-    private JButton back, validation, reset;
+public class RegistrationButtonsPanel extends ButtonsPanel {
+    private JButton validation, reset;
     private RegistrationForm registrationForm;
     private ApplicationController controller;
 
     public RegistrationButtonsPanel(RegistrationForm registrationForm) {
-        this.controller = new ApplicationController();
+        super(registrationForm);
         this.registrationForm = registrationForm;
+        this.controller = new ApplicationController();
 
         this.setLayout(new FlowLayout());
 
-        back = new JButton("Back");
         validation = new JButton("Validation");
         reset = new JButton("Reset");
-        this.add(back);
         this.add(validation);
         this.add(reset);
-        ButtonListener buttonListener = new ButtonListener();
-        back.addActionListener(buttonListener);
         ButtonListener2 buttonListener2 = new ButtonListener2();
         validation.addActionListener(buttonListener2);
         ButtonListener3 buttonListener3 = new ButtonListener3();
         reset.addActionListener(buttonListener3);
-    }
-
-    private class ButtonListener implements ActionListener {
-        public void actionPerformed(ActionEvent event) {
-            registrationForm.removeAll();
-            registrationForm.add(new WelcomePanel());
-            registrationForm.revalidate();
-            registrationForm.repaint();
-        }
     }
 
     private class ButtonListener2 implements ActionListener {
