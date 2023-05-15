@@ -8,7 +8,7 @@ public class BuildingDBAccess implements BuildingDataAccess {
     public ArrayList<Building> getAllBuildings() throws AllBuildingsException {
         try {
             Connection connection = SingletonConnection.getInstance();
-            String sql = "SELECT * FROM building"; // !!!!! pas fini
+            String sql = "SELECT * FROM building";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet data = statement.executeQuery();
             ArrayList<Building> allBuildings = new ArrayList<>();

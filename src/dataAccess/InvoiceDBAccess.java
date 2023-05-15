@@ -8,8 +8,18 @@ public class InvoiceDBAccess implements InvoiceDataAccess {
     public HashMap<Invoice, String> getAllInvoices(String cityName, double minAmount) throws AllInvoicesException {
         try {
             Connection connection = SingletonConnection.getInstance();
-            String sql = "SELECT"; // !!!!! pas fini
+            String sql = new StringBuilder()
+                    .append("SELECT lastName, totalPriceWithoutVAT, totalPriceIncludingVAT, documentID, invoiceDate, isPaid, subscriptionID ")
+                    .append("FROM address ")
+                    .append("JOIN person per ON per.addressID = address.addressID ")
+                    .append("JOIN subscription ON person = nationalRegistrationNumber ")
+                    .append("JOIN invoice ON subscription = subscriptionID ")
+                    .append("WHERE cityName = ? ")
+                    .append("AND totalPriceIncludingVAT > ?")
+                    .toString();
             PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, cityName);
+            statement.setDouble(2, minAmount);
             ResultSet data = statement.executeQuery();
             HashMap<Invoice, String> allInvoices = new HashMap<>();
             Invoice invoice;
@@ -19,6 +29,7 @@ public class InvoiceDBAccess implements InvoiceDataAccess {
             }
             return allInvoices;
         } catch (SQLException exception) {
+            exception.printStackTrace();
             throw new AllInvoicesException();
         }
     }

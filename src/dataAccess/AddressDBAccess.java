@@ -24,8 +24,16 @@ public class AddressDBAccess implements AddressDataAccess {
     public HashMap<Address, String> getAddress(String cardID) throws AddressException {
         try {
             Connection connection = SingletonConnection.getInstance();
-            String sql = "SELECT"; // !!!!! pas fini
+            String sql = new StringBuilder()
+                    .append("SELECT addr.addressID, streetNumber, street, cityName, zip, subscriptionID ")
+                    .append("FROM card ")
+                    .append("JOIN subscription ON subscriptionID = subscription ")
+                    .append("JOIN person per ON nationalRegistrationNumber = person ")
+                    .append("JOIN address addr ON addr.addressID = per.addressID ")
+                    .append("WHERE cardID = ?")
+                    .toString();
             PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, cardID);
             ResultSet data = statement.executeQuery();
             HashMap<Address, String> allAddress = new HashMap<>();
             Address address;
