@@ -1,6 +1,7 @@
 package userInterface;
 
 import controller.ApplicationController;
+import model.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -29,7 +30,19 @@ public class JobTaskButtonsPanel extends ButtonsPanel {
 
     private class ButtonListener2 implements ActionListener {
         public void actionPerformed(ActionEvent event) {
+            jobTaskForm.removeAll();
+            try {
+                JobTaskModel model = new JobTaskModel(controller.getJobTaskInfos(Integer.parseInt(jobTaskForm.getJobTaskPanel().getMonth().getText()), Integer.parseInt(jobTaskForm.getJobTaskPanel().getYear().getText())));
+                JTable table = new JTable(model);
+                table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                JScrollPane scrollPane = new JScrollPane(table);
+                jobTaskForm.add(scrollPane, BorderLayout.CENTER);
+            } catch (AllBuildingsException | AllRepairOrdersException exception) {
+                JOptionPane.showMessageDialog(null, exception, "JobTask Exception", JOptionPane.ERROR_MESSAGE);
+            }
 
+            revalidate();
+            repaint();
         }
     }
 

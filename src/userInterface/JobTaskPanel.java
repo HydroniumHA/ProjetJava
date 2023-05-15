@@ -37,4 +37,12 @@ public class JobTaskPanel extends JPanel {
         month.setText("");
         year.setText("");
     }
+
+    public JTextField getMonth() {
+        return month;
+    }
+
+    public JTextField getYear() {
+        return year;
+    }
 }
