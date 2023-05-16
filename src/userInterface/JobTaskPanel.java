@@ -26,7 +26,7 @@ public class JobTaskPanel extends JPanel {
 
         yearLabel = new JLabel("Year :");
         yearLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        ArrayList<Integer> years = new ArrayList<>(Arrays.asList(2021, 2022, 2023));
+        ArrayList<Integer> years = new ArrayList<>(Arrays.asList(2022, 2023));
         year = new JSpinner(new SpinnerListModel(years));
         this.add(yearLabel);
         this.add(year);

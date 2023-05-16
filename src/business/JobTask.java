@@ -5,33 +5,42 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class JobTask {
-    private RepairOrderManager repairOrderManager;
     private BuildingManager buildingManager;
-    private HashMap<String, Double> averageBuildingRepairTime;
+    private HashMap<String, Double> averageBuildingRepairDays;
+    private boolean complete;
 
     public JobTask() {
-        this.repairOrderManager = new RepairOrderManager();
         this.buildingManager = new BuildingManager();
-        averageBuildingRepairTime = new HashMap<>();
+        this.averageBuildingRepairDays = new HashMap<>();
     }
 
-    public HashMap<String, Double> getJobTaskInfos(int month, int year) throws AllBuildingsException, AllRepairOrdersException, JobTaskException {
-        if (String.valueOf(month).matches("^(0?[1-9]|1[0-2])$") && String.valueOf(year).matches("^\\d+$")) {
-            ArrayList<Building> buildings = buildingManager.getAllBuildings();
-            ArrayList<RepairOrder> repairOrders;
+    public void go() {
+        complete = true;
+    }
 
-            for (Building building : buildings) {
-                repairOrders = repairOrderManager.getAllRepairOrders(building.getBuildingID());
-                StatThread statThread = new StatThread(building.getBuildingID(), month, year, repairOrders,this);
-                statThread.start();
+    public HashMap<String, Double> getJobTaskInfos(int month, int year) throws AllBuildingsException, JobTaskException {
+        if (true) {
+            ArrayList<Building> buildings = buildingManager.getAllBuildings();
+            CommonZone commonZone = new CommonZone();
+            StatThreadProducer statThreadProducer = new StatThreadProducer(buildings, month, year, commonZone);
+            StatThreadConsumer statThreadConsumer = new StatThreadConsumer(commonZone, this);
+
+            statThreadProducer.start();
+            statThreadConsumer.start();
+
+            while (!complete) {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException exception) {
+                    throw  new JobTaskException();
+                }
             }
-            return averageBuildingRepairTime;
+            return averageBuildingRepairDays;
         }
         throw new JobTaskException();
     }
 
-    public void setData(String buildingID, double averageRepairTime) {
-        //TESTS A FAIRE !!!
-        averageBuildingRepairTime.put(buildingID, averageRepairTime);
+    public void setJobTaskInfos(String buildingID, Double averageRepairDays) {
+        averageBuildingRepairDays.put(buildingID, averageRepairDays);
     }
 }

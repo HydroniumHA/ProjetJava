@@ -42,7 +42,7 @@ public class JobTaskButtonsPanel extends ButtonsPanel {
                 table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
                 JScrollPane scrollPane = new JScrollPane(table);
                 jobTaskForm.add(scrollPane, BorderLayout.CENTER);
-            } catch (AllBuildingsException | AllRepairOrdersException | JobTaskException exception) {
+            } catch (AllBuildingsException | JobTaskException exception) {
                 JOptionPane.showMessageDialog(null, exception, "JobTask Exception", JOptionPane.ERROR_MESSAGE);
             }
             revalidate();

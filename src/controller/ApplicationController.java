@@ -94,7 +94,7 @@ public class ApplicationController {
         return buildingManager.getAllBuildings();
     }
 
-    public HashMap<String, Double> getJobTaskInfos(int month, int year) throws AllBuildingsException, AllRepairOrdersException, JobTaskException {
+    public HashMap<String, Double> getJobTaskInfos(int month, int year) throws AllBuildingsException, JobTaskException {
         return jobTask.getJobTaskInfos(month, year);
     }
 }
