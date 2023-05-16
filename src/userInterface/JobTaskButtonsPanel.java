@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class JobTaskButtonsPanel extends ButtonsPanel {
-    private JButton validation, reset;
+    private JButton validation;
     private JobTaskForm jobTaskForm;
     private ApplicationController controller;
 
@@ -19,20 +19,25 @@ public class JobTaskButtonsPanel extends ButtonsPanel {
         this.setLayout(new FlowLayout());
 
         validation = new JButton("Validation");
-        reset = new JButton("Reset");
         this.add(validation);
-        this.add(reset);
         ButtonListener2 buttonListener2 = new ButtonListener2();
         validation.addActionListener(buttonListener2);
-        ButtonListener3 buttonListener3 = new ButtonListener3();
-        reset.addActionListener(buttonListener3);
     }
 
     private class ButtonListener2 implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             jobTaskForm.removeAll();
             try {
-                JobTaskModel model = new JobTaskModel(controller.getJobTaskInfos(Integer.parseInt(jobTaskForm.getJobTaskPanel().getMonth().getText()), Integer.parseInt(jobTaskForm.getJobTaskPanel().getYear().getText())));
+                int nbMonth = -1;
+                String month = jobTaskForm.getJobTaskPanel().getMonth().getValue().toString();
+                String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+                for (int i = 0; i < 12; i++) {
+                    if (month.equals(months[i])) {
+                        nbMonth = i + 1;
+                        break;
+                    }
+                }
+                JobTaskModel model = new JobTaskModel(controller.getJobTaskInfos(nbMonth, Integer.parseInt(jobTaskForm.getJobTaskPanel().getYear().getValue().toString())));
                 JTable table = new JTable(model);
                 table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
                 JScrollPane scrollPane = new JScrollPane(table);
@@ -40,15 +45,8 @@ public class JobTaskButtonsPanel extends ButtonsPanel {
             } catch (AllBuildingsException | AllRepairOrdersException exception) {
                 JOptionPane.showMessageDialog(null, exception, "JobTask Exception", JOptionPane.ERROR_MESSAGE);
             }
-
             revalidate();
             repaint();
-        }
-    }
-
-    private class ButtonListener3 implements ActionListener {
-        public void actionPerformed(ActionEvent event) {
-            jobTaskForm.getJobTaskPanel().setInitialAll();
         }
     }
 }
