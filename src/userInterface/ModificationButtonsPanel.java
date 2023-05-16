@@ -44,11 +44,11 @@ public class ModificationButtonsPanel extends ButtonsPanel {
             //Valider les données ici !!!
 
             try {
-                    Address address = new Address(UUID.randomUUID().toString(), formPanel.getStreet().getText(), Integer.parseInt(formPanel.getNumber().getText()), formPanel.getCityName().getText(), Integer.parseInt(formPanel.getZip().getText()));
-                    Person person = new Person(formPanel.getNationalRegistrationNumber().getText(), formPanel.getLastName().getText(), formPanel.getFirstName().getText(), genderPanel.getGender(), LocalDate.of(year, month, day), formPanel.getEmail().getText(), formPanel.getPhoneNumber().getText(), newsLetterPanel.getSelected(),null);
-                    controller.updatePerson(person);
-                    //controller.updateAddress(address);
-            } catch (UpdatePersonException exception) {
+                Person person = new Person(formPanel.getNationalRegistrationNumber().getText(), formPanel.getLastName().getText(), formPanel.getFirstName().getText(), genderPanel.getGender(), LocalDate.of(year, month, day), formPanel.getEmail().getText(), formPanel.getPhoneNumber().getText(), newsLetterPanel.getSelected(), controller.getPersonAddress(formPanel.getNationalRegistrationNumber().getText()).get(0).getAddressID());
+                Address address = new Address(person.getAddressID(), formPanel.getStreet().getText(), Integer.parseInt(formPanel.getNumber().getText()), formPanel.getCityName().getText(), Integer.parseInt(formPanel.getZip().getText()));
+                controller.updatePerson(person);
+                controller.updateAddress(address);
+            } catch (UpdatePersonException | UpdateAddressException | AddressException exception) {
                 JOptionPane.showMessageDialog(null, exception, "Person Exception", JOptionPane.ERROR_MESSAGE);
             }
         }

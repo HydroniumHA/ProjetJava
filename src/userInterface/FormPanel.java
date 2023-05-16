@@ -181,6 +181,22 @@ public class FormPanel extends JPanel {
         newsLetterPanel.setSelected(wantsNewsLetter);
     }
 
+    public void setStreet(String text) {
+        street.setText(text);
+    }
+
+    public void setStreetNumber(String text) {
+        streetNumber.setText(text);
+    }
+
+    public void setCityName(String text) {
+        cityName.setText(text);
+    }
+
+    public void setZip(String text) {
+        zip.setText(text);
+    }
+
     public void setInitialAll() {
         nationalRegistrationNumber.setText("");
         lastName.setText("");

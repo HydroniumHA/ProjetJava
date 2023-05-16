@@ -30,16 +30,32 @@ public class ApplicationController {
         personManager.addPerson(person);
     }
 
-    public void addAddress(Address address) throws AddAddressException {
-        addressManager.addAddress(address);
-    }
-
     public ArrayList<Person> getAllPersons() throws AllPersonsException {
         return personManager.getAllPersons();
     }
 
+    public void updatePerson(Person person) throws UpdatePersonException {
+        personManager.updatePerson(person);
+    }
+
     public void deletePerson(String nationalRegistrationNumber) throws DeletePersonException {
         personManager.deletePerson(nationalRegistrationNumber);
+    }
+
+    public void addAddress(Address address) throws AddAddressException {
+        addressManager.addAddress(address);
+    }
+
+    public HashMap<Address, String> getAddress(String cardID) throws AddressException {
+        return addressManager.getAddress(cardID);
+    }
+
+    public ArrayList<Address> getPersonAddress(String nationalRegistrationNumber) throws AddressException {
+        return addressManager.getPersonAddress(nationalRegistrationNumber);
+    }
+
+    public void updateAddress(Address address) throws UpdateAddressException {
+        addressManager.updateAddress(address);
     }
 
     public HashMap<Invoice, String> getAllInvoices(String cityName, double minAmount) throws AllInvoicesException {
@@ -50,10 +66,6 @@ public class ApplicationController {
         return repairOrderManager.getAllRepairOrders(buildingID);
     }
 
-    public HashMap<Address, String> getAddress(String cardID) throws AddressException {
-        return addressManager.getAddress(cardID);
-    }
-
     public void addSubscription(Subscription subscription) throws AddSubscriptionException {
         subscriptionManager.addSubscription(subscription);
     }
@@ -62,19 +74,15 @@ public class ApplicationController {
         cardManager.addCard(card);
     }
 
-    public void updatePerson(Person person) throws UpdatePersonException {
-        personManager.updatePerson(person);
-    }
-
-    public HashMap<String, Double> getJobTaskInfos(int month, int year) throws AllBuildingsException, AllRepairOrdersException {
-        return jobTask.getJobTaskInfos(month, year);
+    public ArrayList<Card> getAllCards() throws AllCardsException {
+        return cardManager.getAllCards();
     }
 
     public ArrayList<Building> getAllBuildings() throws AllBuildingsException {
         return buildingManager.getAllBuildings();
     }
 
-    public ArrayList<Card> getAllCards() throws AllCardsException {
-        return cardManager.getAllCards();
+    public HashMap<String, Double> getJobTaskInfos(int month, int year) throws AllBuildingsException, AllRepairOrdersException {
+        return jobTask.getJobTaskInfos(month, year);
     }
 }

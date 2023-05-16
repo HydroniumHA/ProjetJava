@@ -151,6 +151,15 @@ public class MenuWindow extends JFrame {
                         formPanel.setEmail((String)model.getValueAt(i,5));
                         formPanel.setNewsLetter((boolean)model.getValueAt(i,6));
                         formPanel.setPhoneNumber((String)model.getValueAt(i,7));
+                        try {
+                            Address address = controller.getPersonAddress((String)model.getValueAt(i, 0)).get(0);
+                            formPanel.setStreet(address.getStreet());
+                            formPanel.setStreetNumber(address.getStreetNumber().toString());
+                            formPanel.setCityName(address.getCityName());
+                            formPanel.setZip(address.getZip().toString());
+                        } catch (AddressException exception) {
+                            JOptionPane.showMessageDialog(null, exception,"Address Exception", JOptionPane.ERROR_MESSAGE);
+                        }
                         mainContainer.add(modificationForm);
                         revalidate();
                         repaint();

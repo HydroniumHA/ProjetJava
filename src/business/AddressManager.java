@@ -2,6 +2,8 @@ package business;
 
 import dataAccess.*;
 import model.*;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AddressManager {
@@ -19,5 +21,15 @@ public class AddressManager {
     public HashMap<Address, String> getAddress(String cardID) throws AddressException {
         //TESTS A FAIRE !!!
         return dao.getAddress(cardID);
+    }
+
+    public ArrayList<Address> getPersonAddress(String nationalRegistrationNumber) throws AddressException {
+        //TESTS A FAIRE !!!
+        return dao.getPersonAddress(nationalRegistrationNumber);
+    }
+
+    public void updateAddress(Address address) throws UpdateAddressException {
+        //TESTS A FAIRE !!!
+        dao.updateAddress(address);
     }
 }

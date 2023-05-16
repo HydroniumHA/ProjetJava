@@ -29,6 +29,7 @@ public class JobTask {
     }
 
     public void setData(String buildingID, double averageRepairTime) {
+        //TESTS A FAIRE !!!
         averageBuildingRepairTime.put(buildingID, averageRepairTime);
     }
 }

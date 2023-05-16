@@ -2,6 +2,7 @@ package dataAccess;
 
 import model.*;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AddressDBAccess implements AddressDataAccess {
@@ -44,6 +45,41 @@ public class AddressDBAccess implements AddressDataAccess {
             return allAddress;
         } catch (SQLException | ConnectionException exception) {
             throw new AddressException();
+        }
+    }
+
+    public ArrayList<Address> getPersonAddress(String nationalRegistrationNumber) throws AddressException {
+        try {
+            Connection connection = SingletonConnection.getInstance();
+            String sql = "SELECT * FROM address JOIN person per ON per.addressID = address.addressID WHERE nationalRegistrationNumber = ?" ;
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, nationalRegistrationNumber);
+            ResultSet data = statement.executeQuery();
+            ArrayList<Address> allAddress = new ArrayList<>();
+            Address address;
+            while (data.next()) {
+                address = new Address(data.getString("addressID"), data.getString("street"), data.getInt("streetNumber"), data.getString("cityName"), data.getInt("zip"));
+                allAddress.add(address);
+            }
+            return allAddress;
+        } catch (SQLException | ConnectionException exception) {
+            throw new AddressException();
+        }
+    }
+
+    public void updateAddress(Address address) throws UpdateAddressException {
+        try {
+            Connection connection = SingletonConnection.getInstance();
+            String sql = "UPDATE address SET street = ?, streetNumber = ?, cityName = ?, zip = ? WHERE addressID = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, address.getStreet());
+            statement.setInt(2, address.getStreetNumber());
+            statement.setString(3, address.getCityName());
+            statement.setInt(4, address.getZip());
+            statement.setString(5, address.getAddressID());
+            statement.executeUpdate();
+        } catch (SQLException | ConnectionException exception) {
+            throw new UpdateAddressException();
         }
     }
 }

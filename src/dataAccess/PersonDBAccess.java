@@ -70,15 +70,14 @@ public class PersonDBAccess implements PersonDataAccess {
     public void updatePerson(Person person) throws UpdatePersonException {
         try {
             Connection connection = SingletonConnection.getInstance();
-            String sql = "UPDATE person SET nationalRegistrationNumber = ?, lastName = ?, firstname = ?, gender = ?, birthdate = ?, wantsNewsLetter = ? WHERE nationalRegistrationNumber = ?";
+            String sql = "UPDATE person SET lastName = ?, firstname = ?, gender = ?, birthdate = ?, wantsNewsLetter = ? WHERE nationalRegistrationNumber = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, person.getNationalRegistrationNumber());
-            statement.setString(2, person.getLastName());
-            statement.setString(3, person.getFirstName());
-            statement.setString(4, Character.toString(person.getGender()));
-            statement.setDate(5, java.sql.Date.valueOf(person.getBirthdate()));
-            statement.setBoolean(6, person.getWantsNewsLetter());
-            statement.setString(7, person.getNationalRegistrationNumber());
+            statement.setString(1, person.getLastName());
+            statement.setString(2, person.getFirstName());
+            statement.setString(3, Character.toString(person.getGender()));
+            statement.setDate(4, java.sql.Date.valueOf(person.getBirthdate()));
+            statement.setBoolean(5, person.getWantsNewsLetter());
+            statement.setString(6, person.getNationalRegistrationNumber());
             statement.executeUpdate();
             if (!person.getEmail().equals("")) {
                 sql = "UPDATE person SET email = ? WHERE nationalRegistrationNumber = ?";
