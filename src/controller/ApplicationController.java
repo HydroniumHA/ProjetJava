@@ -58,6 +58,10 @@ public class ApplicationController {
         addressManager.updateAddress(address);
     }
 
+    public void deleteAddress(String nationalRegistrationNumber) throws DeleteAddressException {
+        addressManager.deleteAddress(nationalRegistrationNumber);
+    }
+
     public HashMap<Invoice, String> getAllInvoices(String cityName, double minAmount) throws AllInvoicesException {
         return invoiceManager.getAllInvoices(cityName, minAmount);
     }
@@ -70,6 +74,10 @@ public class ApplicationController {
         subscriptionManager.addSubscription(subscription);
     }
 
+    public void deleteSubscription(String nationalRegistrationNumber) throws DeleteSubscriptionException {
+        subscriptionManager.deleteSubscription(nationalRegistrationNumber);
+    }
+
     public void addCard(Card card) throws AddCardException {
         cardManager.addCard(card);
     }
@@ -78,11 +86,15 @@ public class ApplicationController {
         return cardManager.getAllCards();
     }
 
+    public void deleteCard(String nationalRegistrationNumber) throws DeleteCardException {
+        cardManager.deleteCard(nationalRegistrationNumber);
+    }
+
     public ArrayList<Building> getAllBuildings() throws AllBuildingsException {
         return buildingManager.getAllBuildings();
     }
 
-    public HashMap<String, Double> getJobTaskInfos(int month, int year) throws AllBuildingsException, AllRepairOrdersException {
+    public HashMap<String, Double> getJobTaskInfos(int month, int year) throws AllBuildingsException, AllRepairOrdersException, JobTaskException {
         return jobTask.getJobTaskInfos(month, year);
     }
 }

@@ -25,4 +25,30 @@ public class SubscriptionDBAccess implements SubscriptionDataAccess {
             throw new AddSubscriptionException();
         }
     }
+
+    public void deleteSubscription(String nationalRegistrationNumber) throws DeleteSubscriptionException {
+        try {
+            Connection connection = SingletonConnection.getInstance();
+            String sql = new StringBuilder()
+                    .append("SELECT subscriptionID ")
+                    .append("FROM subscription ")
+                    .append("JOIN person ON person = nationalRegistrationNumber ")
+                    .append("WHERE nationalRegistrationNumber = ? ")
+                    .toString();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, nationalRegistrationNumber);
+            ResultSet data = statement.executeQuery();
+            String subscriptionID = null;
+            while (data.next()) {
+                subscriptionID = data.getString("subscriptionID");
+            }
+            sql = "DELETE FROM subscription WHERE subscriptionID = ?";
+            PreparedStatement statement2 = connection.prepareStatement(sql);
+            statement2.setString(1, subscriptionID);
+            statement2.executeUpdate();
+        } catch (SQLException | ConnectionException exception) {
+            exception.printStackTrace();
+            throw new DeleteSubscriptionException();
+        }
+    }
 }

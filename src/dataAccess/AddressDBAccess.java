@@ -82,4 +82,30 @@ public class AddressDBAccess implements AddressDataAccess {
             throw new UpdateAddressException();
         }
     }
+
+    public void deleteAddress(String nationalRegistrationNumber) throws DeleteAddressException {
+        try {
+            Connection connection = SingletonConnection.getInstance();
+            String sql = new StringBuilder()
+                    .append("SELECT address.addressID ")
+                    .append("FROM address ")
+                    .append("JOIN person per ON per.addressID = address.addressID ")
+                    .append("WHERE nationalRegistrationNumber = ? ")
+                    .toString();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, nationalRegistrationNumber);
+            ResultSet data = statement.executeQuery();
+            String addressID = null;
+            while (data.next()) {
+                addressID = data.getString("addressID");
+            }
+            sql = "DELETE FROM address WHERE addressID = ?";
+            PreparedStatement statement2 = connection.prepareStatement(sql);
+            statement2.setString(1, addressID);
+            statement2.executeUpdate();
+        } catch (SQLException | ConnectionException exception) {
+            exception.printStackTrace();
+            throw new DeleteAddressException();
+        }
+    }
 }

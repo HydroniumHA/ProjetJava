@@ -211,4 +211,8 @@ public class FormPanel extends JPanel {
         zip.setText("");
         newsLetterPanel.setInitialAll();
     }
+
+    public void disableNationalRegistrationNumber() {
+        nationalRegistrationNumber.setEditable(false);
+    }
 }

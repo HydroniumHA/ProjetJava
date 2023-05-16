@@ -33,6 +33,7 @@ public class PersonDBAccess implements PersonDataAccess {
                 statement.executeUpdate();
             }
         } catch (SQLException | ConnectionException exception) {
+            exception.printStackTrace();
             throw new AddPersonException();
         }
     }
@@ -45,6 +46,7 @@ public class PersonDBAccess implements PersonDataAccess {
             statement.setString(1, nationalRegistrationNumber);
             statement.executeUpdate();
         } catch (SQLException | ConnectionException exception) {
+            exception.printStackTrace();
             throw new DeletePersonException();
         }
     }

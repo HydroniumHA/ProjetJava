@@ -11,6 +11,7 @@ public class ModificationForm extends JPanel {
         this.setLayout(new BorderLayout());
 
         formPanel = new FormPanel();
+        formPanel.disableNationalRegistrationNumber();
         modificationButtonsPanel = new ModificationButtonsPanel(this);
         this.add(formPanel, BorderLayout.CENTER);
         this.add(modificationButtonsPanel, BorderLayout.SOUTH);

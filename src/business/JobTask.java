@@ -15,17 +15,19 @@ public class JobTask {
         averageBuildingRepairTime = new HashMap<>();
     }
 
-    public HashMap<String, Double> getJobTaskInfos(int month, int year) throws AllBuildingsException, AllRepairOrdersException {
-        // TESTS A FAIRE !!!
-        ArrayList<Building> buildings = buildingManager.getAllBuildings();
-        ArrayList<RepairOrder> repairOrders;
+    public HashMap<String, Double> getJobTaskInfos(int month, int year) throws AllBuildingsException, AllRepairOrdersException, JobTaskException {
+        if (String.valueOf(month).matches("^(0?[1-9]|1[0-2])$") && String.valueOf(year).matches("^\\d+$")) {
+            ArrayList<Building> buildings = buildingManager.getAllBuildings();
+            ArrayList<RepairOrder> repairOrders;
 
-        for (Building building : buildings) {
-            repairOrders = repairOrderManager.getAllRepairOrders(building.getBuildingID());
-            StatThread statThread = new StatThread(building.getBuildingID(), month, year, repairOrders,this);
-            statThread.start();
+            for (Building building : buildings) {
+                repairOrders = repairOrderManager.getAllRepairOrders(building.getBuildingID());
+                StatThread statThread = new StatThread(building.getBuildingID(), month, year, repairOrders,this);
+                statThread.start();
+            }
+            return averageBuildingRepairTime;
         }
-        return averageBuildingRepairTime;
+        throw new JobTaskException();
     }
 
     public void setData(String buildingID, double averageRepairTime) {

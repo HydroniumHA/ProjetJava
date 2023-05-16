@@ -30,9 +30,20 @@ public class RemoveButtonsPanel extends ButtonsPanel {
 
     private class ButtonListener2 implements ActionListener {
         public void actionPerformed(ActionEvent event) {
+            String nationalRegistrationNumber = removeForm.getRemovePanel().getNationalRegistrationNumber().getText();
+
             try {
-                controller.deletePerson(removeForm.getRemovePanel().getNationalRegistrationNumber().getText());
-            } catch (DeletePersonException exception) {
+                if (nationalRegistrationNumber.matches("^\\d{2}\\.\\d{2}\\.\\d{2}-\\d{3}\\.\\d{2}$")) {
+                    if (JOptionPane.showConfirmDialog(null, "If you delete this person, it will also delete their subscription data as well as their card data.") == JOptionPane.OK_OPTION) {
+                        controller.deleteCard(nationalRegistrationNumber);
+                        controller.deleteSubscription(nationalRegistrationNumber);
+                        controller.deletePerson(nationalRegistrationNumber);
+                        controller.deleteAddress(nationalRegistrationNumber);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "The national registration number don't match this : xx.xx.xx-xxx.xx (x are digits).","Delete Person Exception", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (DeletePersonException | DeleteAddressException | DeleteSubscriptionException | DeleteCardException exception) {
                 JOptionPane.showMessageDialog(null, exception,"Delete Person Exception", JOptionPane.ERROR_MESSAGE);
             }
         }

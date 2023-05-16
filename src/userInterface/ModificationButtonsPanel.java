@@ -8,7 +8,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
-import java.util.UUID;
 
 public class ModificationButtonsPanel extends ButtonsPanel {
     private JButton validation, reset;
@@ -35,19 +34,44 @@ public class ModificationButtonsPanel extends ButtonsPanel {
     private class ButtonListener2 implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             FormPanel formPanel = modificationForm.getFormPanel();
-            GenderPanel genderPanel = modificationForm.getFormPanel().getGenderPanel();
-            NewsLetterPanel newsLetterPanel = modificationForm.getFormPanel().getNewsLetterPanel();
+            String nationalRegistrationNumber = formPanel.getNationalRegistrationNumber().getText();
+            String lastName = formPanel.getLastName().getText();
+            String firstName = formPanel.getFirstName().getText();
+            Character gender = modificationForm.getFormPanel().getGenderPanel().getGender();
             String birthdate = formPanel.getBirthdate().getText();
-            int year = Integer.parseInt(birthdate.substring(6, 10));
-            int month = Integer.parseInt(birthdate.substring(3, 5));
-            int day = Integer.parseInt(birthdate.substring(0, 2));
-            //Valider les données ici !!!
+            String email = formPanel.getEmail().getText();
+            String phoneNumber = formPanel.getPhoneNumber().getText();
+            boolean newsLetter = modificationForm.getFormPanel().getNewsLetterPanel().getSelected();
+            String street = formPanel.getStreet().getText();
+            String streetNumber = formPanel.getNumber().getText();
+            String cityName = formPanel.getCityName().getText();
+            String zip = formPanel.getZip().getText();
 
             try {
-                Person person = new Person(formPanel.getNationalRegistrationNumber().getText(), formPanel.getLastName().getText(), formPanel.getFirstName().getText(), genderPanel.getGender(), LocalDate.of(year, month, day), formPanel.getEmail().getText(), formPanel.getPhoneNumber().getText(), newsLetterPanel.getSelected(), controller.getPersonAddress(formPanel.getNationalRegistrationNumber().getText()).get(0).getAddressID());
-                Address address = new Address(person.getAddressID(), formPanel.getStreet().getText(), Integer.parseInt(formPanel.getNumber().getText()), formPanel.getCityName().getText(), Integer.parseInt(formPanel.getZip().getText()));
-                controller.updatePerson(person);
-                controller.updateAddress(address);
+                if (nationalRegistrationNumber.isBlank() | lastName.isBlank() | firstName.isBlank() | birthdate.isBlank() | street.isBlank() | streetNumber.isBlank() | cityName.isBlank() | zip.isBlank()) {
+                    JOptionPane.showMessageDialog(null, "All fields must be filled except email and phoneNumber.", "Person Exception", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    if (nationalRegistrationNumber.matches("^\\d{2}\\.\\d{2}\\.\\d{2}-\\d{3}\\.\\d{2}$")) {
+                        if (birthdate.matches("^(0[1-9]|1\\d|2\\d|3[01])\\/(0[1-9]|1[0-2])\\/(19\\d{2}|20\\d{2})$")) {
+                            String year = birthdate.substring(6, 10);
+                            String month = birthdate.substring(3, 5);
+                            String day = birthdate.substring(0, 2);
+
+                            if (streetNumber.matches("^\\d+$") && zip.matches("^\\d+$")) {
+                                Person person = new Person(nationalRegistrationNumber, lastName, firstName, gender, LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day)), email, phoneNumber, newsLetter, controller.getPersonAddress(nationalRegistrationNumber).get(0).getAddressID());
+                                Address address = new Address(person.getAddressID(), street, Integer.parseInt(streetNumber), cityName, Integer.parseInt(zip));
+                                controller.updatePerson(person);
+                                controller.updateAddress(address);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "The street number/zip are not whole numbers.","Person Exception", JOptionPane.ERROR_MESSAGE);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "The birthdate don't match this : dd/MM/yyyy or is not valid.","Person Exception", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "The national registration number don't match this : xx.xx.xx-xxx.xx (x are digits).","Person Exception", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
             } catch (UpdatePersonException | UpdateAddressException | AddressException exception) {
                 JOptionPane.showMessageDialog(null, exception, "Person Exception", JOptionPane.ERROR_MESSAGE);
             }

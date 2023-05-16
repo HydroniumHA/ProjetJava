@@ -12,13 +12,19 @@ public class PersonManager {
     }
 
     public void addPerson(Person person) throws AddPersonException {
-        //TESTS A FAIRE !!!
-        dao.addPerson(person);
+        if (person.getNationalRegistrationNumber().matches("^\\d{2}\\.\\d{2}\\.\\d{2}-\\d{3}\\.\\d{2}$") && person.getLastName() != null && person.getFirstName() != null && Character.toString(person.getGender()).matches("^(M|F|O)$") && person.getBirthdate() != null && person.getWantsNewsLetter() != null && person.getAddressID() != null) {
+            dao.addPerson(person);
+        } else {
+            throw new AddPersonException();
+        }
     }
 
     public void deletePerson(String nationalRegistrationNumber) throws DeletePersonException {
-        //TESTS A FAIRE !!!
-        dao.deletePerson(nationalRegistrationNumber);
+        if (nationalRegistrationNumber.matches("^\\d{2}\\.\\d{2}\\.\\d{2}-\\d{3}\\.\\d{2}$")) {
+            dao.deletePerson(nationalRegistrationNumber);
+        } else {
+            throw new DeletePersonException();
+        }
     }
 
     public ArrayList<Person> getAllPersons() throws AllPersonsException {
@@ -26,7 +32,10 @@ public class PersonManager {
     }
 
     public void updatePerson(Person person) throws UpdatePersonException {
-        //TESTS A FAIRE !!!
-        dao.updatePerson(person);
+        if (person.getNationalRegistrationNumber().matches("^\\d{2}\\.\\d{2}\\.\\d{2}-\\d{3}\\.\\d{2}$") && person.getLastName() != null && person.getFirstName() != null && person.getGender() != null && person.getBirthdate() != null && person.getWantsNewsLetter() != null && person.getAddressID() != null) {
+            dao.updatePerson(person);
+        } else {
+            throw new UpdatePersonException();
+        }
     }
 }

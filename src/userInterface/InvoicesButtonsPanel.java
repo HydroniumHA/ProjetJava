@@ -30,18 +30,27 @@ public class InvoicesButtonsPanel extends ButtonsPanel {
 
     private class ButtonListener2 implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            allInvoicesForm.removeAll();
-            //Valider les données ici !!!
+            String minAmount = allInvoicesForm.getAllInvoicesPanel().getMinAmount().getText();
+
             try {
-                AllInvoicesModel model = new AllInvoicesModel(controller.getAllInvoices(allInvoicesForm.getAllInvoicesPanel().getCityName().getText(), Double.parseDouble(allInvoicesForm.getAllInvoicesPanel().getMinAmount().getText())));
-                JTable table = new JTable(model);
-                JScrollPane scrollPane = new JScrollPane(table);
-                allInvoicesForm.add(scrollPane);
+                if (allInvoicesForm.getAllInvoicesPanel().getCityName().getText().isBlank()) {
+                    JOptionPane.showMessageDialog(null, "Please fill in the field cityName.","All Invoices Exception", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    if (minAmount.matches("^\\d+(\\.\\d+)?$")) {
+                        allInvoicesForm.removeAll();
+                        AllInvoicesModel model = new AllInvoicesModel(controller.getAllInvoices(allInvoicesForm.getAllInvoicesPanel().getCityName().getText(), Double.parseDouble(minAmount)));
+                        JTable table = new JTable(model);
+                        JScrollPane scrollPane = new JScrollPane(table);
+                        allInvoicesForm.add(scrollPane);
+                        allInvoicesForm.revalidate();
+                        allInvoicesForm.repaint();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "The minimum amount is not a number (use . for a comma).","All Invoices Exception", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
             } catch (AllInvoicesException exception) {
                 JOptionPane.showMessageDialog(null, exception,"All Invoices Exception", JOptionPane.ERROR_MESSAGE);
             }
-            allInvoicesForm.revalidate();
-            allInvoicesForm.repaint();
         }
     }
 

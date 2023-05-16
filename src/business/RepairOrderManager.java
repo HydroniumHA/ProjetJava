@@ -12,7 +12,9 @@ public class RepairOrderManager {
     }
 
     public ArrayList<RepairOrder> getAllRepairOrders(String buildingID) throws AllRepairOrdersException {
-        // TESTS A FAIRE !!!
-        return dao.getAllRepairOrders(buildingID);
+        if (buildingID != null) {
+            return dao.getAllRepairOrders(buildingID);
+        }
+        throw new AllRepairOrdersException();
     }
 }

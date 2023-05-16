@@ -8,8 +8,8 @@ public class StatThread extends Thread {
     private String buildingID;
     private int month;
     private int year;
-    ArrayList<RepairOrder> repairOrders;
-    JobTask jobTask;
+    private ArrayList<RepairOrder> repairOrders;
+    private JobTask jobTask;
 
     public StatThread(String buildingID, int month, int year, ArrayList<RepairOrder> repairOrders, JobTask jobTask) {
         this.buildingID = buildingID;

@@ -36,4 +36,31 @@ public class CardDBAccess implements CardDataAccess {
             throw new AllCardsException();
         }
     }
+
+    public void deleteCard(String nationalRegistrationNumber) throws DeleteCardException {
+        try {
+            Connection connection = SingletonConnection.getInstance();
+            String sql = new StringBuilder()
+                    .append("SELECT cardID ")
+                    .append("FROM card ")
+                    .append("JOIN subscription ON subscription = subscriptionID ")
+                    .append("JOIN person ON person = nationalRegistrationNumber ")
+                    .append("WHERE nationalRegistrationNumber = ? ")
+                    .toString();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, nationalRegistrationNumber);
+            ResultSet data = statement.executeQuery();
+            String cardID = null;
+            while (data.next()) {
+                cardID = data.getString("cardID");
+            }
+            sql = "DELETE FROM card WHERE cardID = ?";
+            PreparedStatement statement2 = connection.prepareStatement(sql);
+            statement2.setString(1, cardID);
+            statement2.executeUpdate();
+        } catch (SQLException | ConnectionException exception) {
+            exception.printStackTrace();
+            throw new DeleteCardException();
+        }
+    }
 }

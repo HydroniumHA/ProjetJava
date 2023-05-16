@@ -12,7 +12,9 @@ public class InvoiceManager {
     }
 
     public HashMap<Invoice, String> getAllInvoices(String cityName, double minAmount) throws AllInvoicesException {
-        // TESTS A FAIRE !!!
-        return dao.getAllInvoices(cityName, minAmount);
+        if (cityName != null && String.valueOf(minAmount).matches("^\\d+(\\.\\d+)?$")) {
+            return dao.getAllInvoices(cityName, minAmount);
+        }
+        throw new AllInvoicesException();
     }
 }

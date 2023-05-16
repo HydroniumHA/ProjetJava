@@ -5,5 +5,8 @@ import java.util.ArrayList;
 
 public interface CardDataAccess {
     void addCard(Card card) throws AddCardException;
-    public ArrayList<Card> getAllCards() throws AllCardsException;
+
+    ArrayList<Card> getAllCards() throws AllCardsException;
+
+    void deleteCard(String nationalRegistrationNumber) throws DeleteCardException;
 }
