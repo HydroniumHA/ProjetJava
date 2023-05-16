@@ -14,7 +14,7 @@ public class CardDBAccess implements CardDataAccess {
             statement.setDate(2, java.sql.Date.valueOf(card.getCreationDate()));
             statement.setString(3, card.getSubscriptionID());
             statement.executeUpdate();
-        } catch (SQLException exception) {
+        } catch (SQLException | ConnectionException exception) {
             throw new AddCardException();
         }
     }
@@ -32,7 +32,7 @@ public class CardDBAccess implements CardDataAccess {
                 allCards.add(card);
             }
             return allCards;
-        } catch (SQLException exception) {
+        } catch (SQLException | ConnectionException exception) {
             throw new AllCardsException();
         }
     }

@@ -21,7 +21,7 @@ public class SubscriptionDBAccess implements SubscriptionDataAccess {
                 statement.setString(2, subscription.getPersonID());
                 statement.executeUpdate();
             }
-        } catch (SQLException exception) {
+        } catch (SQLException | ConnectionException exception) {
             throw new AddSubscriptionException();
         }
     }

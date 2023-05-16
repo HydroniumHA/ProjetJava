@@ -26,7 +26,7 @@ public class RepairOrderDBAccess implements RepairOrderDataAccess {
                 allRepairOrders.add(repairOrder);
             }
             return allRepairOrders;
-        } catch (SQLException exception) {
+        } catch (SQLException | ConnectionException exception) {
             exception.printStackTrace();
             throw new AllRepairOrdersException();
         }

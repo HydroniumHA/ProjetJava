@@ -18,7 +18,7 @@ public class BuildingDBAccess implements BuildingDataAccess {
                 allBuildings.add(building);
             }
             return allBuildings;
-        } catch (SQLException exception) {
+        } catch (SQLException | ConnectionException exception) {
             throw new AllBuildingsException();
         }
     }

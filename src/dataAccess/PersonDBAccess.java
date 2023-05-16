@@ -32,7 +32,7 @@ public class PersonDBAccess implements PersonDataAccess {
                 statement.setString(2, person.getNationalRegistrationNumber());
                 statement.executeUpdate();
             }
-        } catch (SQLException exception) {
+        } catch (SQLException | ConnectionException exception) {
             throw new AddPersonException();
         }
     }
@@ -44,7 +44,7 @@ public class PersonDBAccess implements PersonDataAccess {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, nationalRegistrationNumber);
             statement.executeUpdate();
-        } catch (SQLException exception) {
+        } catch (SQLException | ConnectionException exception) {
             throw new DeletePersonException();
         }
     }
@@ -62,7 +62,7 @@ public class PersonDBAccess implements PersonDataAccess {
                 allPersons.add(person);
             }
             return allPersons;
-        } catch (SQLException exception) {
+        } catch (SQLException | ConnectionException exception) {
             throw new AllPersonsException();
         }
     }
@@ -94,7 +94,7 @@ public class PersonDBAccess implements PersonDataAccess {
                 statement.setString(2, person.getNationalRegistrationNumber());
                 statement.executeUpdate();
             }
-        } catch (SQLException exception) {
+        } catch (SQLException | ConnectionException exception) {
             throw new UpdatePersonException();
         }
     }

@@ -16,7 +16,7 @@ public class AddressDBAccess implements AddressDataAccess {
             statement.setString(4, address.getCityName());
             statement.setInt(5, address.getZip());
             statement.executeUpdate();
-        } catch (SQLException exception) {
+        } catch (SQLException | ConnectionException exception) {
             throw new AddAddressException();
         }
     }
@@ -42,7 +42,7 @@ public class AddressDBAccess implements AddressDataAccess {
                 allAddress.put(address, data.getString("subscriptionID"));
             }
             return allAddress;
-        } catch (SQLException exception) {
+        } catch (SQLException | ConnectionException exception) {
             throw new AddressException();
         }
     }
