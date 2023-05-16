@@ -1,9 +1,7 @@
 package userInterface;
 
 import controller.ApplicationController;
-import model.AddressException;
-import model.AllPersonsException;
-
+import model.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
