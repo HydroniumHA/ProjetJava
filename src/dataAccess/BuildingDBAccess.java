@@ -14,8 +14,10 @@ public class BuildingDBAccess implements BuildingDataAccess {
             ArrayList<Building> allBuildings = new ArrayList<>();
             Building building;
             while (data.next()) {
-                building = new Building(data.getString("buildingID"), data.getInt("numberMaxPlaces"), data.getInt("numberOccupiedPlaces"), data.getString("buildingType"), data.getString("address"));
-                allBuildings.add(building);
+                if (data.getString("buildingType").equals("Workshop")) {
+                    building = new Building(data.getString("buildingID"), data.getInt("numberMaxPlaces"), data.getInt("numberOccupiedPlaces"), data.getString("buildingType"), data.getString("address"));
+                    allBuildings.add(building);
+                }
             }
             return allBuildings;
         } catch (SQLException | ConnectionException exception) {

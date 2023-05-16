@@ -20,7 +20,7 @@ public class NewsLetterPanel extends JPanel {
     }
 
     public Boolean getSelected() {
-        return accept.isSelected();
+        return accept.isSelected() || reject.isSelected();
     }
 
     public void setSelected(boolean wantsNewsLetter) {

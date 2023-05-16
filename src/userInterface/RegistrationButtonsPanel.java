@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.time.LocalDate;
+import java.util.Random;
 import java.util.UUID;
 
 public class RegistrationButtonsPanel extends ButtonsPanel {
@@ -47,7 +48,7 @@ public class RegistrationButtonsPanel extends ButtonsPanel {
             String zip = formPanel.getZip().getText();
 
             try {
-                if (nationalRegistrationNumber.isBlank() | lastName.isBlank() | firstName.isBlank() | birthdate.isBlank() | street.isBlank() | streetNumber.isBlank() | cityName.isBlank() | zip.isBlank()) {
+                if (nationalRegistrationNumber.isBlank() || lastName.isBlank() || firstName.isBlank() || gender.equals('X') || birthdate.isBlank() || street.isBlank() || streetNumber.isBlank() || cityName.isBlank() || zip.isBlank() | !newsLetter) {
                     JOptionPane.showMessageDialog(null, "All fields must be filled except email and phoneNumber.", "Person Exception", JOptionPane.ERROR_MESSAGE);
                 } else {
                     if (nationalRegistrationNumber.matches("^\\d{2}\\.\\d{2}\\.\\d{2}-\\d{3}\\.\\d{2}$")) {
@@ -57,10 +58,11 @@ public class RegistrationButtonsPanel extends ButtonsPanel {
                             String day = birthdate.substring(0, 2);
 
                             if (streetNumber.matches("^\\d+$") && zip.matches("^\\d+$")) {
+                                Random random = new Random();
                                 Address address = new Address(UUID.randomUUID().toString(), street, Integer.parseInt(streetNumber), cityName, Integer.parseInt(zip));
                                 Person person = new Person(nationalRegistrationNumber, lastName, firstName, gender, LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day)), email, phoneNumber, newsLetter, address.getAddressID());
                                 Subscription subscription = new Subscription(UUID.randomUUID().toString(), LocalDate.now(), 31, null, person.getNationalRegistrationNumber());
-                                Card card = new Card(UUID.randomUUID().toString(), LocalDate.now(), subscription.getSubscriptionID());
+                                Card card = new Card(String.valueOf(random.nextInt(999)), LocalDate.now(), subscription.getSubscriptionID());
                                 controller.addAddress(address);
                                 controller.addPerson(person);
                                 controller.addSubscription(subscription);

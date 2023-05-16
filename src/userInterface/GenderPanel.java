@@ -29,7 +29,10 @@ public class GenderPanel extends JPanel {
         if (female.isSelected()) {
             return 'F';
         }
-        return 'O';
+        if (other.isSelected()) {
+            return 'O';
+        }
+        return 'X';
     }
 
     public void setSelected(char gender) {

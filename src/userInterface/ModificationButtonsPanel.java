@@ -48,7 +48,7 @@ public class ModificationButtonsPanel extends ButtonsPanel {
             String zip = formPanel.getZip().getText();
 
             try {
-                if (nationalRegistrationNumber.isBlank() | lastName.isBlank() | firstName.isBlank() | birthdate.isBlank() | street.isBlank() | streetNumber.isBlank() | cityName.isBlank() | zip.isBlank()) {
+                if (nationalRegistrationNumber.isBlank() || lastName.isBlank() || firstName.isBlank() || gender.equals('X') || birthdate.isBlank() || street.isBlank() || streetNumber.isBlank() || cityName.isBlank() || zip.isBlank()) {
                     JOptionPane.showMessageDialog(null, "All fields must be filled except email and phoneNumber.", "Person Exception", JOptionPane.ERROR_MESSAGE);
                 } else {
                     if (nationalRegistrationNumber.matches("^\\d{2}\\.\\d{2}\\.\\d{2}-\\d{3}\\.\\d{2}$")) {
