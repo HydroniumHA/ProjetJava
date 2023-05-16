@@ -51,7 +51,6 @@ public class AllRepairOrdersForm extends JPanel {
             //Valider les données ici !!!
             try {
                 AllRepairOrdersModel model = new AllRepairOrdersModel(controller.getAllRepairOrders(combox.getSelectedItem().toString()));
-                System.out.println(combox.getSelectedItem().toString());
                 JTable table = new JTable(model);
                 JScrollPane scrollPane = new JScrollPane(table);
                 AllRepairOrdersForm.this.add(scrollPane);
