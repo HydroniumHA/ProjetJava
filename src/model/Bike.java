@@ -42,20 +42,4 @@ public class Bike {
     public void setDeclassified(Boolean declassified) {
         isDeclassified = declassified;
     }
-
-    public String getBikeID() {
-        return bikeID;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public LocalDate getPurchaseDate() {
-        return purchaseDate;
-    }
 }
