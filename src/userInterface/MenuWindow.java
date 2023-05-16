@@ -139,19 +139,19 @@ public class MenuWindow extends JFrame {
                     public void valueChanged(ListSelectionEvent e) {
                         mainContainer.removeAll();
                         int i = table.getSelectedRow();
-                        RegistrationForm registrationForm = new RegistrationForm();
+                        ModificationForm modificationForm = new ModificationForm();
+                        FormPanel formPanel = modificationForm.getFormPanel();
 
-                        registrationForm.getFormPanel().setNationalRegistrationNumber((String)model.getValueAt(i,0));
-                        registrationForm.getFormPanel().setLastName((String)model.getValueAt(i,1));
-                        registrationForm.getFormPanel().setFirstName((String)model.getValueAt(i,2));
+                        formPanel.setNationalRegistrationNumber((String)model.getValueAt(i,0));
+                        formPanel.setLastName((String)model.getValueAt(i,1));
+                        formPanel.setFirstName((String)model.getValueAt(i,2));
                         DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-                        registrationForm.getFormPanel().setBirthdate(format.format(model.getValueAt(i,3)));
-                        registrationForm.getFormPanel().setGender((char)model.getValueAt(i,4));
-                        registrationForm.getFormPanel().setEmail((String)model.getValueAt(i,5));
-                        registrationForm.getFormPanel().setNewsLetter((boolean)model.getValueAt(i,6));
-                        registrationForm.getFormPanel().setPhoneNumber((String)model.getValueAt(i,7));
-                        registrationForm.getFormPanel().setAddressNonEditable();
-                        mainContainer.add(registrationForm);
+                        formPanel.setBirthdate(format.format(model.getValueAt(i,3)));
+                        formPanel.setGender((char)model.getValueAt(i,4));
+                        formPanel.setEmail((String)model.getValueAt(i,5));
+                        formPanel.setNewsLetter((boolean)model.getValueAt(i,6));
+                        formPanel.setPhoneNumber((String)model.getValueAt(i,7));
+                        mainContainer.add(modificationForm);
                         revalidate();
                         repaint();
                     }

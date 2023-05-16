@@ -181,13 +181,6 @@ public class FormPanel extends JPanel {
         newsLetterPanel.setSelected(wantsNewsLetter);
     }
 
-    public void setAddressNonEditable() {
-        street.setEditable(false);
-        streetNumber.setEditable(false);
-        cityName.setEditable(false);
-        zip.setEditable(false);
-    }
-
     public void setInitialAll() {
         nationalRegistrationNumber.setText("");
         lastName.setText("");

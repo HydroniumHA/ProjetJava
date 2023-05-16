@@ -2,20 +2,22 @@ package userInterface;
 
 import controller.ApplicationController;
 import model.*;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class RegistrationButtonsPanel extends ButtonsPanel {
+public class ModificationButtonsPanel extends ButtonsPanel {
     private JButton validation, reset;
-    private RegistrationForm registrationForm;
+    private ModificationForm modificationForm;
     private ApplicationController controller;
 
-    public RegistrationButtonsPanel(RegistrationForm registrationForm) {
-        super(registrationForm);
-        this.registrationForm = registrationForm;
+    public ModificationButtonsPanel(ModificationForm modificationForm) {
+        super(modificationForm);
+        this.modificationForm = modificationForm;
         this.controller = new ApplicationController();
 
         this.setLayout(new FlowLayout());
@@ -32,9 +34,9 @@ public class RegistrationButtonsPanel extends ButtonsPanel {
 
     private class ButtonListener2 implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            FormPanel formPanel = registrationForm.getFormPanel();
-            GenderPanel genderPanel = registrationForm.getFormPanel().getGenderPanel();
-            NewsLetterPanel newsLetterPanel = registrationForm.getFormPanel().getNewsLetterPanel();
+            FormPanel formPanel = modificationForm.getFormPanel();
+            GenderPanel genderPanel = modificationForm.getFormPanel().getGenderPanel();
+            NewsLetterPanel newsLetterPanel = modificationForm.getFormPanel().getNewsLetterPanel();
             String birthdate = formPanel.getBirthdate().getText();
             int year = Integer.parseInt(birthdate.substring(6, 10));
             int month = Integer.parseInt(birthdate.substring(3, 5));
@@ -43,14 +45,10 @@ public class RegistrationButtonsPanel extends ButtonsPanel {
 
             try {
                     Address address = new Address(UUID.randomUUID().toString(), formPanel.getStreet().getText(), Integer.parseInt(formPanel.getNumber().getText()), formPanel.getCityName().getText(), Integer.parseInt(formPanel.getZip().getText()));
-                    Person person = new Person(formPanel.getNationalRegistrationNumber().getText(), formPanel.getLastName().getText(), formPanel.getFirstName().getText(), genderPanel.getGender(), LocalDate.of(year, month, day), formPanel.getEmail().getText(), formPanel.getPhoneNumber().getText(), newsLetterPanel.getSelected(), address.getAddressID());
-                    Subscription subscription = new Subscription(UUID.randomUUID().toString(), LocalDate.now(), 31, null, person.getNationalRegistrationNumber());
-                    Card card = new Card(UUID.randomUUID().toString(), LocalDate.now(), subscription.getSubscriptionID());
-                    controller.addAddress(address);
-                    controller.addPerson(person);
-                    controller.addSubscription(subscription);
-                    controller.addCard(card);
-            } catch (AddPersonException | AddAddressException | AddSubscriptionException | AddCardException exception) {
+                    Person person = new Person(formPanel.getNationalRegistrationNumber().getText(), formPanel.getLastName().getText(), formPanel.getFirstName().getText(), genderPanel.getGender(), LocalDate.of(year, month, day), formPanel.getEmail().getText(), formPanel.getPhoneNumber().getText(), newsLetterPanel.getSelected(),null);
+                    controller.updatePerson(person);
+                    //controller.updateAddress(address);
+            } catch (UpdatePersonException exception) {
                 JOptionPane.showMessageDialog(null, exception, "Person Exception", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -58,7 +56,7 @@ public class RegistrationButtonsPanel extends ButtonsPanel {
 
     private class ButtonListener3 implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            registrationForm.getFormPanel().setInitialAll();
+            modificationForm.getFormPanel().setInitialAll();
         }
     }
 }

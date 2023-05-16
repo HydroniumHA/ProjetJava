@@ -26,6 +26,8 @@ public class NewsLetterPanel extends JPanel {
     public void setSelected(boolean wantsNewsLetter) {
         if (wantsNewsLetter) {
             accept.setSelected(true);
+        } else {
+            reject.setSelected(true);
         }
     }
 
