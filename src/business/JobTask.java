@@ -6,23 +6,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class JobTask {
-    private BuildingDataAccess dao;
-    private RepairOrderManager manager;
+    private RepairOrderManager repairOrderManager;
+    private BuildingManager buildingManager;
     private HashMap<String, Double> averageBuildingRepairTime;
 
     public JobTask() {
-        this.dao = new BuildingDBAccess();
-        this.manager = new RepairOrderManager();
+        this.repairOrderManager = new RepairOrderManager();
+        this.buildingManager = new BuildingManager();
         averageBuildingRepairTime = new HashMap<>();
     }
 
     public HashMap<String, Double> getJobTaskInfos(int month, int year) throws AllBuildingsException, AllRepairOrdersException {
         // TESTS A FAIRE !!!
-        ArrayList<Building> buildings = dao.getAllBuildings();
+        ArrayList<Building> buildings = buildingManager.getAllBuildings();
         ArrayList<RepairOrder> repairOrders;
 
         for (Building building : buildings) {
-            repairOrders = manager.getAllRepairOrders(building.getBuildingID());
+            repairOrders = repairOrderManager.getAllRepairOrders(building.getBuildingID());
             StatThread statThread = new StatThread(building.getBuildingID(), month, year, repairOrders,this);
             statThread.start();
         }

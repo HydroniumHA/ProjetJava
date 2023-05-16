@@ -13,6 +13,7 @@ public class ApplicationController {
     private RepairOrderManager repairOrderManager;
     private SubscriptionManager subscriptionManager;
     private CardManager cardManager;
+    private BuildingManager buildingManager;
     private JobTask jobTask;
 
     public ApplicationController() {
@@ -22,6 +23,7 @@ public class ApplicationController {
         this.repairOrderManager = new RepairOrderManager();
         this.subscriptionManager = new SubscriptionManager();
         this.cardManager = new CardManager();
+        this.buildingManager = new BuildingManager();
         this.jobTask = new JobTask();
     }
 
@@ -67,5 +69,13 @@ public class ApplicationController {
 
     public HashMap<String, Double> getJobTaskInfos(int month, int year) throws AllBuildingsException, AllRepairOrdersException {
         return jobTask.getJobTaskInfos(month, year);
+    }
+
+    public ArrayList<Building> getAllBuildings() throws AllBuildingsException {
+        return buildingManager.getAllBuildings();
+    }
+
+    public ArrayList<Card> getAllCards() throws AllCardsException {
+        return cardManager.getAllCards();
     }
 }
