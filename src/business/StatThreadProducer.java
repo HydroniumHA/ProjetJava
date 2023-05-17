@@ -27,20 +27,24 @@ public class StatThreadProducer extends Thread {
                 ArrayList<RepairOrder> repairOrders;
 
                 for (Building building : buildings) {
-                    daysToRepair = 0;
-                    nbRepairOrders = 0;
-                    repairOrders = manager.getAllRepairOrders(building.getBuildingID());
-                    for (RepairOrder repairOrder : repairOrders) {
-                        if (repairOrder.getRepairDate() != null && repairOrder.getRepairDate().getMonthValue() == month && repairOrder.getRepairDate().getYear() == year) {
-                            daysToRepair += ChronoUnit.DAYS.between(repairOrder.getIssueDate(), repairOrder.getRepairDate());
-                            nbRepairOrders++;
+                    if (building.getBuildingType().equals("Workshop")) {
+                        daysToRepair = 0;
+                        nbRepairOrders = 0;
+                        repairOrders = manager.getAllRepairOrders(building.getBuildingID());
+                        for (RepairOrder repairOrder : repairOrders) {
+                            if (repairOrder.getRepairDate() != null && repairOrder.getRepairDate().getMonthValue() == month && repairOrder.getRepairDate().getYear() == year) {
+                                daysToRepair += ChronoUnit.DAYS.between(repairOrder.getIssueDate(), repairOrder.getRepairDate());
+                                nbRepairOrders++;
+                            }
                         }
-                    }
-                    if (nbRepairOrders != 0) {
-                        commonZone.setBuildingID(building.getBuildingID());
-                        commonZone.setAverageRepairDays((double)daysToRepair / nbRepairOrders);
-                        commonZone.notify();
-                        commonZone.wait();
+                        if (nbRepairOrders != 0) {
+                            commonZone.setBuildingID(building.getBuildingID());
+                            commonZone.setAverageRepairDays((double)daysToRepair / nbRepairOrders);
+                            System.out.println(daysToRepair);
+                            System.out.println(nbRepairOrders);
+                            commonZone.notify();
+                            commonZone.wait();
+                        }
                     }
                 }
                 commonZone.complete();

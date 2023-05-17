@@ -19,7 +19,7 @@ public class MenuWindow extends JFrame {
     public MenuWindow() {
         super("Libiavelo");
         setBounds(100,100,850,500);
-        this.setIconImage(new ImageIcon(MenuWindow.class.getResource("/libiaveloLogo.png")).getImage());
+        this.setIconImage(new ImageIcon(MenuWindow.class.getResource("/userInterface/libiaveloLogo.png")).getImage());
 
         this.controller = new ApplicationController();
 

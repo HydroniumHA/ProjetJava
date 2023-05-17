@@ -32,7 +32,7 @@ public class CardDBAccess implements CardDataAccess {
                 allCards.add(card);
             }
             return allCards;
-        } catch (SQLException | ConnectionException exception) {
+        } catch (SQLException | ConnectionException | SettorException exception) {
             throw new AllCardsException();
         }
     }
@@ -59,7 +59,6 @@ public class CardDBAccess implements CardDataAccess {
             statement2.setString(1, cardID);
             statement2.executeUpdate();
         } catch (SQLException | ConnectionException exception) {
-            exception.printStackTrace();
             throw new DeleteCardException();
         }
     }

@@ -1,5 +1,7 @@
 package business;
 
+import model.JobTaskException;
+
 public class StatThreadConsumer extends Thread {
     private CommonZone commonZone;
     private JobTask jobTask;
@@ -26,7 +28,7 @@ public class StatThreadConsumer extends Thread {
                         commonZone.setAverageRepairDays(null);
                         commonZone.notify();
                     }
-                } catch (InterruptedException exception) { }
+                } catch (InterruptedException | JobTaskException exception) { }
             }
             jobTask.go();
         }

@@ -13,7 +13,7 @@ public class Person {
     private Boolean wantsNewsLetter;
     private String addressID;
 
-    public Person(String nationalRegistrationNumber, String lastName, String firstName, Character gender, LocalDate birthdate, String email, String phoneNumber, Boolean wantsNewsLetter, String addressID) {
+    public Person(String nationalRegistrationNumber, String lastName, String firstName, Character gender, LocalDate birthdate, String email, String phoneNumber, Boolean wantsNewsLetter, String addressID) throws SettorException {
         setNationalRegistrationNumber(nationalRegistrationNumber);
         setName(lastName);
         setFirstName(firstName);
@@ -25,40 +25,76 @@ public class Person {
         setAddress(addressID);
     }
 
-    public void setNationalRegistrationNumber(String nationalRegistrationNumber) {
-        this.nationalRegistrationNumber = nationalRegistrationNumber;
+    public void setNationalRegistrationNumber(String nationalRegistrationNumber) throws SettorException {
+        if (nationalRegistrationNumber.matches("^\\d{2}\\.\\d{2}\\.\\d{2}-\\d{3}\\.\\d{2}$")) {
+            this.nationalRegistrationNumber = nationalRegistrationNumber;
+        } else {
+            throw new SettorException();
+        }
     }
 
-    public void setName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String lastName) throws SettorException {
+        if (lastName != null) {
+            this.lastName = lastName;
+        } else {
+            throw new SettorException();
+        }
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstName(String firstName) throws SettorException {
+        if (firstName != null) {
+            this.firstName = firstName;
+        } else {
+            throw new SettorException();
+        }
     }
 
-    public void setGender(Character gender) {
-        this.gender = gender;
+    public void setGender(Character gender) throws SettorException {
+        if (gender != null) {
+            this.gender = gender;
+        } else {
+            throw new SettorException();
+        }
     }
 
-    public void setBirthdate(LocalDate birthdate) {
-        this.birthdate = birthdate;
+    public void setBirthdate(LocalDate birthdate) throws SettorException {
+        if (birthdate != null) {
+            this.birthdate = birthdate;
+        } else {
+            throw new SettorException();
+        }
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String email) throws SettorException {
+        if (email == null || email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
+            this.email = email;
+        } else {
+            throw new SettorException();
+        }
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhoneNumber(String phoneNumber) throws SettorException {
+        if (phoneNumber == null || phoneNumber.matches("^\\+\\d+$")) {
+            this.phoneNumber = phoneNumber;
+        } else {
+            throw new SettorException();
+        }
     }
 
-    public void setWantsNewsLetter(Boolean wantsNewsLetter) {
-        this.wantsNewsLetter = wantsNewsLetter;
+    public void setWantsNewsLetter(Boolean wantsNewsLetter) throws SettorException {
+        if (wantsNewsLetter != null) {
+            this.wantsNewsLetter = wantsNewsLetter;
+        } else {
+            throw new SettorException();
+        }
     }
 
-    public void setAddress(String addressID) {
-        this.addressID = addressID;
+    public void setAddress(String addressID) throws SettorException {
+        if (addressID != null) {
+            this.addressID = addressID;
+        } else {
+            throw new SettorException();
+        }
     }
 
     public String getNationalRegistrationNumber() {

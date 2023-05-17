@@ -20,7 +20,7 @@ public class BuildingDBAccess implements BuildingDataAccess {
                 }
             }
             return allBuildings;
-        } catch (SQLException | ConnectionException exception) {
+        } catch (SQLException | ConnectionException | SettorException exception) {
             throw new AllBuildingsException();
         }
     }

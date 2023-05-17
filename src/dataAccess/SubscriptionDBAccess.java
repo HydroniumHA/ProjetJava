@@ -47,7 +47,6 @@ public class SubscriptionDBAccess implements SubscriptionDataAccess {
             statement2.setString(1, subscriptionID);
             statement2.executeUpdate();
         } catch (SQLException | ConnectionException exception) {
-            exception.printStackTrace();
             throw new DeleteSubscriptionException();
         }
     }

@@ -11,7 +11,7 @@ public class WelcomePanel extends JPanel {
 
         text = new JLabel(
             "<html><h1 style=\"text-align:center;\"><img src=\""
-                + WelcomePanel.class.getResource("/libiaveloLogo.png")
+                + WelcomePanel.class.getResource("/userInterface/libiaveloLogo.png")
                 + "\"><br><br>Welcome to the Libiavelo management software.</h1></html>");
         text.setHorizontalAlignment(SwingConstants.CENTER);
         this.add(text, BorderLayout.CENTER);

@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.time.LocalDate;
-import java.util.Random;
 import java.util.UUID;
 
 public class RegistrationButtonsPanel extends ButtonsPanel {
@@ -53,22 +52,29 @@ public class RegistrationButtonsPanel extends ButtonsPanel {
                 } else {
                     if (nationalRegistrationNumber.matches("^\\d{2}\\.\\d{2}\\.\\d{2}-\\d{3}\\.\\d{2}$")) {
                         if (birthdate.matches("^(0[1-9]|1\\d|2\\d|3[01])\\/(0[1-9]|1[0-2])\\/(19\\d{2}|20\\d{2})$")) {
-                            String year = birthdate.substring(6, 10);
-                            String month = birthdate.substring(3, 5);
-                            String day = birthdate.substring(0, 2);
+                            if (email.isBlank() || email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
+                                if (phoneNumber.isBlank() || phoneNumber.matches("^\\+\\d+$")) {
+                                    String year = birthdate.substring(6, 10);
+                                    String month = birthdate.substring(3, 5);
+                                    String day = birthdate.substring(0, 2);
 
-                            if (streetNumber.matches("^\\d+$") && zip.matches("^\\d+$")) {
-                                Random random = new Random();
-                                Address address = new Address(UUID.randomUUID().toString(), street, Integer.parseInt(streetNumber), cityName, Integer.parseInt(zip));
-                                Person person = new Person(nationalRegistrationNumber, lastName, firstName, gender, LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day)), email, phoneNumber, newsLetter, address.getAddressID());
-                                Subscription subscription = new Subscription(UUID.randomUUID().toString(), LocalDate.now(), 31, null, person.getNationalRegistrationNumber());
-                                Card card = new Card(String.valueOf(random.nextInt(999)), LocalDate.now(), subscription.getSubscriptionID());
-                                controller.addAddress(address);
-                                controller.addPerson(person);
-                                controller.addSubscription(subscription);
-                                controller.addCard(card);
+                                    if (streetNumber.matches("^\\d+$") && zip.matches("^\\d+$")) {
+                                        Address address = new Address(UUID.randomUUID().toString(), street, Integer.parseInt(streetNumber), cityName, Integer.parseInt(zip));
+                                        Person person = new Person(nationalRegistrationNumber, lastName, firstName, gender, LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day)), email, phoneNumber, newsLetter, address.getAddressID());
+                                        Subscription subscription = new Subscription(UUID.randomUUID().toString(), LocalDate.now(), 31, null, person.getNationalRegistrationNumber());
+                                        Card card = new Card(UUID.randomUUID().toString(), LocalDate.now(), subscription.getSubscriptionID());
+                                        controller.addAddress(address);
+                                        controller.addPerson(person);
+                                        controller.addSubscription(subscription);
+                                        controller.addCard(card);
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "The street number/zip are not whole numbers.","Person Exception", JOptionPane.ERROR_MESSAGE);
+                                    }
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "The phone number (optional) must start with a + and can only contain numbers.","Person Exception", JOptionPane.ERROR_MESSAGE);
+                                }
                             } else {
-                                JOptionPane.showMessageDialog(null, "The street number/zip are not whole numbers.","Person Exception", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "The email (optional) must follow this structure : username@domainName.extension.","Person Exception", JOptionPane.ERROR_MESSAGE);
                             }
                         } else {
                             JOptionPane.showMessageDialog(null, "The birthdate don't match this : dd/MM/yyyy or is not valid.","Person Exception", JOptionPane.ERROR_MESSAGE);
@@ -77,7 +83,7 @@ public class RegistrationButtonsPanel extends ButtonsPanel {
                         JOptionPane.showMessageDialog(null, "The national registration number don't match this : xx.xx.xx-xxx.xx (x are digits).","Person Exception", JOptionPane.ERROR_MESSAGE);
                     }
                 }
-            } catch (AddPersonException | AddAddressException | AddSubscriptionException | AddCardException exception) {
+            } catch (AddPersonException | AddAddressException | AddSubscriptionException | AddCardException | SettorException exception) {
                 JOptionPane.showMessageDialog(null, exception, "Person Exception", JOptionPane.ERROR_MESSAGE);
             }
         }

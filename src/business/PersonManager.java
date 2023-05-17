@@ -12,7 +12,7 @@ public class PersonManager {
     }
 
     public void addPerson(Person person) throws AddPersonException {
-        if (person.getNationalRegistrationNumber().matches("^\\d{2}\\.\\d{2}\\.\\d{2}-\\d{3}\\.\\d{2}$") && person.getLastName() != null && person.getFirstName() != null && Character.toString(person.getGender()).matches("^(M|F|O)$") && person.getBirthdate() != null && person.getWantsNewsLetter() != null && person.getAddressID() != null) {
+        if (person.getNationalRegistrationNumber().matches("^\\d{2}\\.\\d{2}\\.\\d{2}-\\d{3}\\.\\d{2}$") && person.getLastName() != null && person.getFirstName() != null && person.getGender() != null && person.getBirthdate() != null && (person.getEmail() == null || person.getEmail().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) && (person.getPhoneNumber() == null || person.getPhoneNumber().matches("^\\+\\d+$")) && person.getWantsNewsLetter() != null && person.getAddressID() != null) {
             dao.addPerson(person);
         } else {
             throw new AddPersonException();
@@ -32,7 +32,7 @@ public class PersonManager {
     }
 
     public void updatePerson(Person person) throws UpdatePersonException {
-        if (person.getNationalRegistrationNumber().matches("^\\d{2}\\.\\d{2}\\.\\d{2}-\\d{3}\\.\\d{2}$") && person.getLastName() != null && person.getFirstName() != null && person.getGender() != null && person.getBirthdate() != null && person.getWantsNewsLetter() != null && person.getAddressID() != null) {
+        if (person.getNationalRegistrationNumber().matches("^\\d{2}\\.\\d{2}\\.\\d{2}-\\d{3}\\.\\d{2}$") && person.getLastName() != null && person.getFirstName() != null && person.getGender() != null && person.getBirthdate() != null && (person.getEmail() == null || person.getEmail().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) && (person.getPhoneNumber() == null || person.getPhoneNumber().matches("^\\+\\d+$")) && person.getWantsNewsLetter() != null && person.getAddressID() != null) {
             dao.updatePerson(person);
         } else {
             throw new UpdatePersonException();

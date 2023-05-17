@@ -40,9 +40,11 @@ public class JobTask {
         throw new JobTaskException();
     }
 
-    public void setJobTaskInfos(String buildingID, Double averageRepairDays) {
-        if (buildingID != null && Double.toString(averageRepairDays).matches("^\\d+(\\.\\d+)?$")) {
+    public void setJobTaskInfos(String buildingID, Double averageRepairDays) throws JobTaskException {
+        if (buildingID != null && averageRepairDays != null && Double.toString(averageRepairDays).matches("^\\d+(\\.\\d+)?$")) {
             averageBuildingRepairDays.put(buildingID, averageRepairDays);
+        } else {
+            throw new JobTaskException();
         }
     }
 }

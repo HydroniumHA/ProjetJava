@@ -28,8 +28,7 @@ public class InvoiceDBAccess implements InvoiceDataAccess {
                 allInvoices.put(invoice, data.getString("lastName"));
             }
             return allInvoices;
-        } catch (SQLException | ConnectionException exception) {
-            exception.printStackTrace();
+        } catch (SQLException | ConnectionException | SettorException exception) {
             throw new AllInvoicesException();
         }
     }

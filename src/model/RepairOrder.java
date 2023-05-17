@@ -9,7 +9,7 @@ public class RepairOrder {
     private String comments;
     private String bike;
 
-    public RepairOrder(String repairID, LocalDate issueDate, LocalDate repairDate, String comments, String bike) {
+    public RepairOrder(String repairID, LocalDate issueDate, LocalDate repairDate, String comments, String bike) throws SettorException {
         setRepairID(repairID);
         setIssueDate(issueDate);
         setRepairDate(repairDate);
@@ -17,12 +17,20 @@ public class RepairOrder {
         setBike(bike);
     }
 
-    public void setRepairID(String repairID) {
-        this.repairID = repairID;
+    public void setRepairID(String repairID) throws SettorException {
+        if (repairID != null) {
+            this.repairID = repairID;
+        } else {
+            throw new SettorException();
+        }
     }
 
-    public void setIssueDate(LocalDate issueDate) {
-        this.issueDate = issueDate;
+    public void setIssueDate(LocalDate issueDate) throws SettorException {
+        if (issueDate != null) {
+            this.issueDate = issueDate;
+        } else {
+            throw new SettorException();
+        }
     }
 
     public void setRepairDate(LocalDate repairDate) {

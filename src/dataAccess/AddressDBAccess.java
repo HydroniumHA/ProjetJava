@@ -43,7 +43,7 @@ public class AddressDBAccess implements AddressDataAccess {
                 allAddress.put(address, data.getString("subscriptionID"));
             }
             return allAddress;
-        } catch (SQLException | ConnectionException exception) {
+        } catch (SQLException | ConnectionException | SettorException exception) {
             throw new AddressException();
         }
     }
@@ -62,7 +62,7 @@ public class AddressDBAccess implements AddressDataAccess {
                 allAddress.add(address);
             }
             return allAddress;
-        } catch (SQLException | ConnectionException exception) {
+        } catch (SQLException | ConnectionException | SettorException exception) {
             throw new AddressException();
         }
     }
@@ -104,7 +104,6 @@ public class AddressDBAccess implements AddressDataAccess {
             statement2.setString(1, addressID);
             statement2.executeUpdate();
         } catch (SQLException | ConnectionException exception) {
-            exception.printStackTrace();
             throw new DeleteAddressException();
         }
     }
