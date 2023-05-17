@@ -45,8 +45,8 @@ public class JobTaskButtonsPanel extends ButtonsPanel {
             } catch (AllBuildingsException | JobTaskException exception) {
                 JOptionPane.showMessageDialog(null, exception, "JobTask Exception", JOptionPane.ERROR_MESSAGE);
             }
-            revalidate();
-            repaint();
+            jobTaskForm.revalidate();
+            jobTaskForm.repaint();
         }
     }
 }

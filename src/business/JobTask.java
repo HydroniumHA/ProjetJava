@@ -19,7 +19,7 @@ public class JobTask {
     }
 
     public HashMap<String, Double> getJobTaskInfos(int month, int year) throws AllBuildingsException, JobTaskException {
-        if (true) {
+        if (String.valueOf(month).matches("^([1-9]|1[0-2])$") && String.valueOf(year).matches("^(19|20)\\d{2}$")) {
             ArrayList<Building> buildings = buildingManager.getAllBuildings();
             CommonZone commonZone = new CommonZone();
             StatThreadProducer statThreadProducer = new StatThreadProducer(buildings, month, year, commonZone);
@@ -32,7 +32,7 @@ public class JobTask {
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException exception) {
-                    throw  new JobTaskException();
+                    throw new JobTaskException();
                 }
             }
             return averageBuildingRepairDays;
@@ -41,6 +41,8 @@ public class JobTask {
     }
 
     public void setJobTaskInfos(String buildingID, Double averageRepairDays) {
-        averageBuildingRepairDays.put(buildingID, averageRepairDays);
+        if (buildingID != null && Double.toString(averageRepairDays).matches("^\\d+(\\.\\d+)?$")) {
+            averageBuildingRepairDays.put(buildingID, averageRepairDays);
+        }
     }
 }

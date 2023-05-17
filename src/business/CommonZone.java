@@ -18,7 +18,9 @@ public class CommonZone {
     }
 
     public void setAverageRepairDays(Double averageRepairDays) {
-        this.averageRepairDays = averageRepairDays;
+        if (averageRepairDays == null || Double.toString(averageRepairDays).matches("^\\d+(\\.\\d+)?$")) {
+            this.averageRepairDays = averageRepairDays;
+        }
     }
 
     public boolean isCompleted() {
