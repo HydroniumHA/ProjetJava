@@ -1,2 +1,2 @@
-# Projet pour le cours de Java Q2 (2023)
+# Projet pour le cours de Java
 ## Logiciel de gestion Libiavelo
